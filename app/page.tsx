@@ -86,6 +86,41 @@ export default function HomePage() {
     }
   }
 
+  async function addTokenToMetaMask() {
+    if (!tokenAddress || !tokenSymbol) {
+      setStatus('No token to add. Detect a token first.');
+      return;
+    }
+
+    if ((window as any).ethereum && (window as any).ethereum.request) {
+      try {
+        const added = await (window as any).ethereum.request({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20',
+            options: {
+              address: tokenAddress,
+              symbol: tokenSymbol,
+              decimals: tokenDecimals,
+              image: '',
+            },
+          },
+        });
+
+        if (added) {
+          setStatus(`${tokenSymbol} added to wallet.`);
+        } else {
+          setStatus('Token not added to wallet.');
+        }
+      } catch (err: any) {
+        console.error(err);
+        setStatus(err?.message || 'Could not add token to wallet.');
+      }
+    } else {
+      setStatus('No injected wallet found (MetaMask).');
+    }
+  }
+
   async function handleDonate() {
     if (!isConnected || !address) {
       setStatus('Please connect your wallet first.');
@@ -133,6 +168,10 @@ export default function HomePage() {
     }
   }
 
+  const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(
+    `ethereum:${DONATION_ADDRESS}`
+  )}`;
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <div className="mx-auto max-w-6xl px-4 py-10">
@@ -158,6 +197,16 @@ export default function HomePage() {
               >
                 {DONATION_ADDRESS}
               </a>
+
+              <div className="mt-4 flex items-center gap-4">
+                <div>
+                  <img src={qrSrc} alt="Donation QR" className="h-40 w-40 rounded-lg bg-white p-2" />
+                </div>
+                <div className="text-sm text-slate-200">
+                  <p className="mb-2">Share this QR or address for quick donations. It encodes the URI <code className="font-mono">ethereum:{DONATION_ADDRESS}</code>.</p>
+                  <p className="text-xs text-slate-300">Note: QR opens wallets supporting deep-links (mobile). Ensure donors use the same chain as the donation address.</p>
+                </div>
+              </div>
             </div>
 
             <div className="mb-6 grid gap-4 sm:grid-cols-2">
@@ -218,6 +267,11 @@ export default function HomePage() {
                   </button>
                 </div>
                 <p className="mt-2 text-xs text-slate-400">Detected token: {tokenSymbol} • decimals: {tokenDecimals}</p>
+
+                <div className="mt-3 flex gap-2">
+                  <button onClick={addTokenToMetaMask} className="rounded-md bg-emerald-500 px-3 py-2 text-sm font-medium text-slate-950">Add token to MetaMask</button>
+                  <button onClick={() => { setTokenAddress(''); setTokenSymbol('TOKEN'); setTokenDecimals(18); setDonationTokenBalance('—') }} className="rounded-md bg-slate-800 px-3 py-2 text-sm">Clear</button>
+                </div>
               </div>
             )}
 
