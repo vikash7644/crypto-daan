@@ -64,3 +64,7 @@ npm run dev
 Crypto transfers are generally irreversible after confirmation. Donors must verify coin, network, receiving address, amount and network fee. Never ask donors for seed phrases or private keys. Do not describe contributions as tax-deductible unless that status has been independently established.
 
 A public crypto donation campaign may trigger fundraising, tax, foreign-contribution, consumer-protection or virtual-digital-asset rules depending on the campaign operator and donor locations. Obtain qualified jurisdiction-specific advice before accepting public contributions, especially cross-border contributions. This software is not legal, tax, investment or custody advice.
+
+## Funding and sponsor pipeline
+
+See [FUNDING_AND_SPONSORS.md](./docs/FUNDING_AND_SPONSORS.md) for a researched shortlist of open-source grants, eligibility notes, readiness requirements and an application work plan. No applications are represented as submitted or approved.
