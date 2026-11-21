@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+const donationsEnabled = process.env.NEXT_PUBLIC_DONATIONS_ENABLED === "true";
+
 const assets = [
   { id: "BTC", name: "Bitcoin", network: "Bitcoin network", address: process.env.NEXT_PUBLIC_BTC_ADDRESS || "bc1p8xm6dpk7lcuq3ahrdzzkfwdrt5f6xhkmezdup4trj280djht53mq5k3rkd", note: "Send BTC only. Do not send wrapped BTC or tokens." },
   { id: "ETH", name: "Ethereum", network: "Ethereum mainnet", address: process.env.NEXT_PUBLIC_ETH_ADDRESS || "0xFb28ed92F3fDA5F5394091D909B9423A20736aB5", note: "Send ETH on Ethereum mainnet only." },
@@ -20,7 +22,7 @@ export default function HomePage() {
   const configured = selected.address.trim().length > 0;
 
   async function copyAddress() {
-    if (!configured) return;
+    if (!configured || !donationsEnabled) return;
     try {
       await navigator.clipboard.writeText(selected.address);
       setCopied(true);
@@ -45,7 +47,7 @@ export default function HomePage() {
           <h1>One billion people.<br /><span>One dollar each.</span><br />A future we build together.</h1>
           <p className="hero-lede">Support open technology for the next generation: QORVYNT programming language, Web4 infrastructure and developer tools.</p>
           <div className="hero-actions"><a className="button button-primary" href="#contribute">Choose a crypto <span>↗</span></a><a className="button button-quiet" href="#mission">Our mission</a></div>
-          <p className="hero-note">Voluntary support. No equity, ownership or financial return promised.</p>
+          <p className="hero-note">Pre-launch. Do not send funds until payment opening is announced.</p>
         </div>
         <div className="goal-card"><div className="goal-card-top"><span>THE COMMUNITY GOAL</span><span className="goal-icon">✳</span></div><div className="goal-number">1B</div><div className="goal-label">people × $1</div><div className="goal-divider" /><div className="goal-total"><span>Long-term campaign ambition</span><strong>$1,000,000,000</strong></div><div className="goal-foot">An aspiration, not funds raised or a guaranteed outcome.</div><div className="orbit orbit-one" /><div className="orbit orbit-two" /></div>
       </section>
@@ -62,24 +64,24 @@ export default function HomePage() {
       </section>
 
       <section className="contribute-section" id="contribute">
-        <div className="contribute-copy"><div className="eyebrow">GLOBAL CRYPTO SUPPORT</div><h2>Choose your crypto.<br /><span>Support the build.</span></h2><p>Choose the exact asset and network below. Copy the matching address and send from your wallet. The $1 idea is a suggested contribution concept; crypto amounts vary with exchange rates and network fees.</p><div className="wallet-safety"><span>⌑</span><p><b>Important safety check</b><br />Always match the coin and network. Never send BTC to an EVM address or USDT on a different network. Never share your seed phrase or private key.</p></div></div>
+        <div className="contribute-copy"><div className="eyebrow">GLOBAL CRYPTO SUPPORT</div><h2>Choose your crypto.<br /><span>Support the build.</span></h2><p>Choose the exact asset and network below. Receiving addresses are shown for review; transfers remain disabled until the campaign is formally opened. The $1 idea is a suggested contribution concept; crypto amounts vary with exchange rates and network fees.</p><div className="wallet-safety"><span>⌑</span><p><b>Important safety check</b><br />Always match the coin and network. Never send BTC to an EVM address or USDT on a different network. Never share your seed phrase or private key.</p></div></div>
         <div className="donation-card">
-          <div className="donation-card-heading"><div><span className="eyebrow">CRYPTO CONTRIBUTION</span><h3>Choose payment method</h3></div><span className="secure-mark">◇</span></div>
+          <div className="donation-card-heading"><div><span className="eyebrow">CRYPTO CONTRIBUTION</span><h3>Payment options preview</h3></div><span className="secure-mark">◇</span></div>
           <label className="field-label" htmlFor="asset">Coin and network</label>
           <select id="asset" className="asset-select" value={selectedId} onChange={(event) => { setSelectedId(event.target.value); setStatus(""); }}>
             <optgroup label="Native coins"><option value="BTC">BTC · Bitcoin</option><option value="ETH">ETH · Ethereum</option><option value="BNB">BNB · BNB Smart Chain</option><option value="SOL">SOL · Solana</option></optgroup>
             <optgroup label="USDT — select the exact network"><option value="USDT-ERC20">USDT · Ethereum (ERC-20)</option><option value="USDT-BEP20">USDT · BNB Smart Chain (BEP-20)</option><option value="USDT-SPL">USDT · Solana (SPL)</option></optgroup>
           </select>
           <div className="selected-asset"><div className="coin-symbol">{selected.id.startsWith("USDT") ? "₮" : selected.id === "BTC" ? "₿" : selected.id === "ETH" ? "Ξ" : selected.id === "BNB" ? "◆" : "◎"}</div><div><b>{selected.name}</b><small>{selected.network}</small></div><span className="network-pill">{selected.id}</span></div>
-          {!configured ? <div className="setup-alert"><b>{selected.name} address not configured</b><span>Donations for this option are disabled until the owner adds and verifies the correct receiving address. No payment should be sent to an unverified address.</span></div> : <div className="address-box"><span>Campaign receiving address — supplied from Phantom wallet</span><code>{selected.address}</code><button className="button button-primary copy-button" onClick={copyAddress} type="button">{copied ? "Copied ✓" : "Copy address"}</button></div>}
+          {!configured ? <div className="setup-alert"><b>{selected.name} address not configured</b><span>Donations for this option are disabled until the owner adds and verifies the correct receiving address. No payment should be sent to an unverified address.</span></div> : <div className="address-box"><span>Campaign receiving address — supplied from Phantom wallet</span><code>{selected.address}</code><button className="button button-primary copy-button" onClick={copyAddress} type="button" disabled={!donationsEnabled}>{!donationsEnabled ? "Contributions not open" : copied ? "Copied ✓" : "Copy address"}</button></div>}
           <p className="network-warning">{selected.note}</p>
-          <div className="status-message" role="status">{status || "After sending, keep your transaction ID for your records."}</div>
+          <div className="status-message" role="status">{status || "Pre-launch: do not send funds until the campaign confirms that payments are open."}</div>
           <div className="pending-wallet">
             <span className="eyebrow">ADDITIONAL PHANTOM ADDRESS</span>
             <code>CrvhxxxYenSVM1p7DBymnTqhAxc9oipRtGKyNNwih4EY</code>
             <small>This address was also supplied from Phantom. Its exact asset and network are not confirmed yet, so it is displayed for transparency only. Do not send funds to it until the campaign labels it for a specific asset and network.</small>
           </div>
-          <p className="form-disclaimer">Payment tracking and receipts are not active yet. Keep your transaction hash and verify any transfer directly on the correct blockchain explorer. This website does not currently collect or submit your email or transaction details.</p>
+          <p className="form-disclaimer">This campaign is in pre-launch review. Do not transfer funds yet. Payment tracking, receipts and on-chain verification are not active; this website does not collect transaction hashes or donor emails.</p>
         </div>
       </section>
 
