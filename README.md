@@ -1,5 +1,7 @@
 # Crypto Daan
 
+**Website:** https://vikash7644.github.io/crypto-daan/ (GitHub Pages deployment must be enabled in repository Settings → Pages → Source: GitHub Actions.)
+
 **One billion people. One dollar each. A future we build together.**
 
 Crypto Daan is a voluntary community-support campaign concept for open technology projects, including QORVYNT language tooling and developer infrastructure. The one-billion/one-dollar line is an aspirational campaign idea—not a fundraising result, forecast, or promise.
