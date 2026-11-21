@@ -100,3 +100,16 @@ button{cursor:pointer}
 .footer>small{display:block;max-width:850px;color:#728194;font-size:9px;line-height:1.8}
 .footer-bottom{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:24px;padding-top:17px;color:#7f8d9c;font:9px 'DM Mono',monospace}
 @media(max-width:760px){.topbar{height:auto;min-height:70px;padding:14px 18px;flex-wrap:wrap;gap:12px}.nav-links{order:3;width:100%;justify-content:space-between;gap:10px;font-size:10px}.nav-wallet{margin-left:auto}.hero{padding:65px 20px 55px;grid-template-columns:1fr;gap:35px}.hero h1{font-size:clamp(40px,11vw,60px)}.goal-card{min-height:340px;padding:25px}.goal-number{font-size:125px;margin-top:35px}.principles{padding:20px;grid-template-columns:1fr;gap:16px}.content-section{padding:75px 20px}.mission-grid{grid-template-columns:1fr}.mission-card{min-height:unset}.mission-card p{min-height:unset}.contribute-section{padding:0 20px 75px;grid-template-columns:1fr;gap:30px}.donation-card{padding:20px}.transparency-section{margin:0 20px 65px;padding:25px;grid-template-columns:1fr;gap:10px}.transparency-section h2{font-size:38px}.footer{padding:30px 20px 22px}}
+
+.asset-select,.reference-form input{width:100%;border:1px solid var(--line);background:#080f17;color:#eef5f7;border-radius:9px;padding:13px;font:12px 'DM Mono',monospace;outline:none}
+.asset-select:focus,.reference-form input:focus{border-color:var(--mint)}
+.selected-asset{display:flex;align-items:center;gap:12px;margin:18px 0;padding:13px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.025)}
+.coin-symbol{width:38px;height:38px;border-radius:11px;background:rgba(167,243,208,.12);color:var(--mint);display:grid;place-items:center;font-size:22px}
+.selected-asset>div:nth-child(2){display:flex;flex-direction:column;gap:4px}
+.selected-asset b{font-size:12px}.selected-asset small{font-size:9px;color:var(--muted)}
+.network-pill{margin-left:auto;font:9px 'DM Mono',monospace;color:var(--mint);border:1px solid rgba(167,243,208,.2);padding:6px;border-radius:6px}
+.address-box code{font:10px 'DM Mono',monospace;color:var(--mint);overflow-wrap:anywhere;line-height:1.7}
+.copy-button{width:100%;border:0;margin-top:8px}
+.network-warning{font-size:10px;line-height:1.7;color:#e6c58b;margin:12px 0}
+.reference-form{border-top:1px solid var(--line);margin-top:18px;padding-top:5px}
+.reference-form small{display:block;color:#8493a2;font-size:9px;line-height:1.7;margin-top:12px}
