@@ -15,8 +15,6 @@ const assets = [
 export default function HomePage() {
   const [selectedId, setSelectedId] = useState("BTC");
   const [copied, setCopied] = useState(false);
-  const [txHash, setTxHash] = useState("");
-  const [email, setEmail] = useState("");
   const [status, setStatus] = useState("");
   const selected = assets.find((asset) => asset.id === selectedId) || assets[0];
   const configured = selected.address.trim().length > 0;
@@ -33,10 +31,6 @@ export default function HomePage() {
     }
   }
 
-  function submitReference(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setStatus("Thank you. Transaction reference captured in this form only after a backend endpoint is configured. Do not treat this message as payment confirmation.");
-  }
 
   return (
     <main className="site-shell">
@@ -72,22 +66,20 @@ export default function HomePage() {
         <div className="donation-card">
           <div className="donation-card-heading"><div><span className="eyebrow">CRYPTO CONTRIBUTION</span><h3>Choose payment method</h3></div><span className="secure-mark">◇</span></div>
           <label className="field-label" htmlFor="asset">Coin and network</label>
-          <select id="asset" className="asset-select" value={selectedId} onChange={(event) => { setSelectedId(event.target.value); setStatus(""); setTxHash(""); }}>
+          <select id="asset" className="asset-select" value={selectedId} onChange={(event) => { setSelectedId(event.target.value); setStatus(""); }}>
             <optgroup label="Native coins"><option value="BTC">BTC · Bitcoin</option><option value="ETH">ETH · Ethereum</option><option value="BNB">BNB · BNB Smart Chain</option><option value="SOL">SOL · Solana</option></optgroup>
             <optgroup label="USDT — select the exact network"><option value="USDT-ERC20">USDT · Ethereum (ERC-20)</option><option value="USDT-BEP20">USDT · BNB Smart Chain (BEP-20)</option><option value="USDT-SPL">USDT · Solana (SPL)</option></optgroup>
           </select>
           <div className="selected-asset"><div className="coin-symbol">{selected.id.startsWith("USDT") ? "₮" : selected.id === "BTC" ? "₿" : selected.id === "ETH" ? "Ξ" : selected.id === "BNB" ? "◆" : "◎"}</div><div><b>{selected.name}</b><small>{selected.network}</small></div><span className="network-pill">{selected.id}</span></div>
-          {!configured ? <div className="setup-alert"><b>{selected.name} address not configured</b><span>Donations for this option are disabled until the owner adds and verifies the correct receiving address. No payment should be sent to an unverified address.</span></div> : <div className="address-box"><span>Campaign receiving address — verify before sending</span><code>{selected.address}</code><button className="button button-primary copy-button" onClick={copyAddress} type="button">{copied ? "Copied ✓" : "Copy address"}</button></div>}
+          {!configured ? <div className="setup-alert"><b>{selected.name} address not configured</b><span>Donations for this option are disabled until the owner adds and verifies the correct receiving address. No payment should be sent to an unverified address.</span></div> : <div className="address-box"><span>Campaign receiving address — supplied from Phantom wallet</span><code>{selected.address}</code><button className="button button-primary copy-button" onClick={copyAddress} type="button">{copied ? "Copied ✓" : "Copy address"}</button></div>}
           <p className="network-warning">{selected.note}</p>
           <div className="status-message" role="status">{status || "After sending, keep your transaction ID for your records."}</div>
-          <form className="reference-form" onSubmit={submitReference}>
-            <label className="field-label" htmlFor="txHash">Transaction ID / hash (optional)</label>
-            <input id="txHash" value={txHash} onChange={(event) => setTxHash(event.target.value)} placeholder="Paste transaction hash after sending" />
-            <label className="field-label" htmlFor="email">Email for receipt (optional)</label>
-            <input id="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" />
-            <button className="button button-quiet donate-button" type="submit">Submit transaction reference</button>
-            <small>This prototype does not submit to a server or verify payments yet. A transaction hash is not proof of receipt until checked on the correct blockchain explorer.</small>
-          </form>
+          <div className="pending-wallet">
+            <span className="eyebrow">ADDITIONAL PHANTOM ADDRESS</span>
+            <code>CrvhxxxYenSVM1p7DBymnTqhAxc9oipRtGKyNNwih4EY</code>
+            <small>This address was also supplied from Phantom. Its exact asset and network are not confirmed yet, so it is displayed for transparency only. Do not send funds to it until the campaign labels it for a specific asset and network.</small>
+          </div>
+          <p className="form-disclaimer">Payment tracking and receipts are not active yet. Keep your transaction hash and verify any transfer directly on the correct blockchain explorer. This website does not currently collect or submit your email or transaction details.</p>
         </div>
       </section>
 
