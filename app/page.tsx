@@ -1,180 +1,4 @@
-"use client";
-
-import { useEffect, useMemo, useState } from 'react';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { ethers } from 'ethers';
-import { useAccount } from 'wagmi';
-
-const DONATIONS_ENABLED = process.env.NEXT_PUBLIC_DONATIONS_ENABLED === 'true';
-const DONATION_ADDRESS = process.env.NEXT_PUBLIC_DONATION_ADDRESS || '';
-const EXPLORER_URL = process.env.NEXT_PUBLIC_EXPLORER_URL || 'https://etherscan.io/address/';
-const ERC20_ABI = [
-  'function transfer(address to, uint256 amount) returns (bool)',
-  'function decimals() view returns (uint8)',
-  'function symbol() view returns (string)',
-  'function balanceOf(address) view returns (uint256)',
-];
-
 export default function HomePage() {
-  const { isConnected, address } = useAccount();
-  const [donationEthBalance, setDonationEthBalance] = useState<string>('—');
-  const [donationTokenBalance, setDonationTokenBalance] = useState<string>('—');
-  const [amount, setAmount] = useState('0.01');
-  const [mode, setMode] = useState<'ETH' | 'TOKEN'>('ETH');
-  const [tokenAddress, setTokenAddress] = useState('');
-  const [tokenSymbol, setTokenSymbol] = useState('TOKEN');
-  const [tokenDecimals, setTokenDecimals] = useState(18);
-  const [status, setStatus] = useState('Ready');
-
-  const walletAddressText = useMemo(() => {
-    if (address) return address;
-    return 'Connect wallet to donate';
-  }, [address]);
-
-  useEffect(() => {
-    fetchDonationBalances();
-  }, [mode, tokenAddress, tokenDecimals]);
-
-  async function fetchDonationBalances() {
-    try {
-      const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL || 'https://polygon-rpc.com';
-      const rpcProvider = new ethers.JsonRpcProvider(rpcUrl);
-      const ethBalance = await rpcProvider.getBalance(DONATION_ADDRESS);
-      setDonationEthBalance(ethers.formatEther(ethBalance));
-
-      if (mode === 'TOKEN' && tokenAddress) {
-        const tokenContract = new ethers.Contract(tokenAddress, ERC20_ABI, rpcProvider);
-        const [symbol, decimals, rawBalance] = await Promise.all([
-          tokenContract.symbol().catch(() => 'TOKEN'),
-          tokenContract.decimals().catch(() => 18),
-          tokenContract.balanceOf(DONATION_ADDRESS),
-        ]);
-        setTokenSymbol(symbol || 'TOKEN');
-        setTokenDecimals(Number(decimals) || 18);
-        setDonationTokenBalance(ethers.formatUnits(rawBalance, Number(decimals) || 18));
-      } else {
-        setDonationTokenBalance('—');
-      }
-    } catch (err) {
-      console.error(err);
-      setDonationEthBalance('—');
-      setDonationTokenBalance('—');
-    }
-  }
-
-  async function detectToken() {
-    if (!tokenAddress) {
-      setStatus('Please enter a token contract address.');
-      return;
-    }
-
-    try {
-      setStatus('Detecting token...');
-      const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL || 'https://polygon-rpc.com';
-      const provider = new ethers.JsonRpcProvider(rpcUrl);
-      const contract = new ethers.Contract(tokenAddress, ERC20_ABI, provider);
-      const [symbol, decimals] = await Promise.all([
-        contract.symbol().catch(() => 'TOKEN'),
-        contract.decimals().catch(() => 18),
-      ]);
-      setTokenSymbol(symbol || 'TOKEN');
-      setTokenDecimals(Number(decimals) || 18);
-      setStatus(`Token detected: ${symbol || 'TOKEN'}`);
-      await fetchDonationBalances();
-    } catch (error) {
-      console.error(error);
-      setStatus('Could not detect token. Check the contract address and network.');
-    }
-  }
-
-  async function addTokenToMetaMask() {
-    if (!tokenAddress || !tokenSymbol) {
-      setStatus('No token to add. Detect a token first.');
-      return;
-    }
-
-    if ((window as any).ethereum && (window as any).ethereum.request) {
-      try {
-        const added = await (window as any).ethereum.request({
-          method: 'wallet_watchAsset',
-          params: {
-            type: 'ERC20',
-            options: {
-              address: tokenAddress,
-              symbol: tokenSymbol,
-              decimals: tokenDecimals,
-              image: '',
-            },
-          },
-        });
-
-        if (added) {
-          setStatus(`${tokenSymbol} added to wallet.`);
-        } else {
-          setStatus('Token not added to wallet.');
-        }
-      } catch (err: any) {
-        console.error(err);
-        setStatus(err?.message || 'Could not add token to wallet.');
-      }
-    } else {
-      setStatus('No injected wallet found (MetaMask).');
-    }
-  }
-
-  async function handleDonate() {
-    if (!DONATIONS_ENABLED || !DONATION_ADDRESS) {
-      setStatus('Contributions are not open yet. Please do not send funds.');
-      return;
-    }
-    if (!isConnected || !address) {
-      setStatus('Please connect your wallet first.');
-      return;
-    }
-
-    if (!amount || Number(amount) <= 0 || Number.isNaN(Number(amount))) {
-      setStatus('Enter a valid donation amount.');
-      return;
-    }
-
-    try {
-      const provider = new ethers.BrowserProvider(window.ethereum as any);
-      const signer = await provider.getSigner();
-
-      if (mode === 'ETH') {
-        setStatus('Preparing ETH donation...');
-        const tx = await signer.sendTransaction({
-          to: DONATION_ADDRESS,
-          value: ethers.parseEther(amount),
-        });
-        setStatus('Transaction sent. Waiting for confirmation...');
-        await tx.wait();
-        setStatus('ETH donation successful! Thank you.');
-      } else {
-        if (!tokenAddress) {
-          setStatus('Please enter a token contract address.');
-          return;
-        }
-
-        setStatus('Preparing token donation...');
-        const tokenContract = new ethers.Contract(tokenAddress, ERC20_ABI, signer);
-        const value = ethers.parseUnits(amount, tokenDecimals);
-        const tx = await tokenContract.transfer(DONATION_ADDRESS, value);
-        setStatus('Token transaction sent. Waiting for confirmation...');
-        await tx.wait();
-        setStatus(`Token donation successful (${tokenSymbol})! Thank you.`);
-      }
-
-      setAmount('0.01');
-      await fetchDonationBalances();
-    } catch (error: any) {
-      console.error(error);
-      setStatus(error?.message || 'Donation failed. Please try again.');
-    }
-  }
-
-  const qrSrc = DONATION_ADDRESS ? `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(`ethereum:${DONATION_ADDRESS}`)}` : '';
-
   return (
     <main id="top" className="min-h-screen bg-slate-950 text-white">
       <div className="mx-auto max-w-6xl px-4 pt-8">
@@ -198,9 +22,7 @@ export default function HomePage() {
                 <p className="text-sm uppercase tracking-[0.2em] text-cyan-300">Crypto Daan</p>
                 <h2 className="mt-2 text-4xl font-bold">Support open technology.</h2>
               </div>
-              <div className="hidden sm:block">
-                <ConnectButton showBalance={false} />
-              </div>
+              
             </div>
 
             <div className="mb-6 rounded-2xl border border-amber-300/30 bg-amber-300/10 p-5" role="status">
@@ -214,7 +36,7 @@ export default function HomePage() {
 
             <div className="mt-6 rounded-xl border border-white/10 bg-slate-900/80 p-4 text-sm text-slate-300">
               <p className="font-medium text-slate-200">Status:</p>
-              <p className="mt-1">{status}</p>
+              <p className="mt-1">Contributions are not open. Please do not send funds.</p>
             </div>
           </div>
 
