@@ -121,3 +121,12 @@ button{cursor:pointer}
 .form-disclaimer{margin:15px 0 0}
 
 .copy-button:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+.share-section{max-width:1068px;margin:0 auto 90px;padding:42px;border:1px solid rgba(167,243,208,.16);border-radius:20px;background:linear-gradient(130deg,rgba(167,243,208,.055),rgba(255,255,255,.018));display:grid;grid-template-columns:1fr .8fr;gap:40px;align-items:center}
+.share-section h2{font-size:clamp(30px,4vw,44px);line-height:1.12;letter-spacing:-.06em;margin:16px 0}
+.share-section h2 span{color:var(--mint)}
+.share-section p{max-width:550px;color:var(--muted);font-size:11px;line-height:1.8}
+.share-actions{display:flex;flex-direction:column;align-items:stretch;gap:10px}
+.share-actions .button{width:100%}
+.campaign-details-link{align-self:center;color:var(--mint);font-size:10px;padding:8px}
+@media(max-width:760px){.share-section{margin:0 20px 65px;padding:25px;grid-template-columns:1fr;gap:15px}}
