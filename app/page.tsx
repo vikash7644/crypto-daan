@@ -9,8 +9,8 @@ const assets = [
   { id: "ETH", name: "Ethereum", network: "Ethereum mainnet", address: process.env.NEXT_PUBLIC_ETH_ADDRESS || "0xFb28ed92F3fDA5F5394091D909B9423A20736aB5", note: "Send ETH on Ethereum mainnet only." },
   { id: "BNB", name: "BNB", network: "BNB Smart Chain (BEP-20)", address: process.env.NEXT_PUBLIC_BNB_ADDRESS || "0xFb28ed92F3fDA5F5394091D909B9423A20736aB5", note: "Send BNB on BNB Smart Chain only." },
   { id: "SOL", name: "Solana", network: "Solana network", address: process.env.NEXT_PUBLIC_SOL_ADDRESS || "DydeUcxGuhPcWryskJBw3KfNceeK7LkCNmYPhLgzpg5v", note: "Send SOL on Solana network only." },
-  { id: "USDT-ERC20", name: "USDT", network: "Ethereum (ERC-20)", address: process.env.NEXT_PUBLIC_USDT_ERC20_ADDRESS || "", note: "USDT ERC-20 only. Ethereum gas fees apply." },
-  { id: "USDT-BEP20", name: "USDT", network: "BNB Smart Chain (BEP-20)", address: process.env.NEXT_PUBLIC_USDT_BEP20_ADDRESS || "", note: "USDT BEP-20 only. BNB gas fees apply." },
+  { id: "USDT-ERC20", name: "USDT", network: "Ethereum (ERC-20)", address: process.env.NEXT_PUBLIC_USDT_ERC20_ADDRESS || "0xFb28ed92F3fDA5F5394091D909B9423A20736aB5", note: "USDT ERC-20 only. Ethereum gas fees apply; verify the official token and network." },
+  { id: "USDT-BEP20", name: "USDT", network: "BNB Smart Chain (BEP-20)", address: process.env.NEXT_PUBLIC_USDT_BEP20_ADDRESS || "0xFb28ed92F3fDA5F5394091D909B9423A20736aB5", note: "USDT BEP-20 only. BNB gas fees apply; verify the official token and network." },
   { id: "USDT-SPL", name: "USDT", network: "Solana (SPL)", address: process.env.NEXT_PUBLIC_USDT_SOL_ADDRESS || "", note: "USDT SPL only. Solana network fees apply." },
 ];
 
