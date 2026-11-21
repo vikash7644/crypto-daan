@@ -12,7 +12,7 @@ If you believe in open technology and want to help this work move forward, pleas
 
 ## Receiving addresses
 
-Only send the exact asset on the exact network shown below. These public addresses were supplied by the campaign owner and have not been independently ownership-verified by GitHub.
+The campaign owner confirms that all addresses listed here were supplied from their Phantom wallet. These public addresses have not been independently ownership-verified by GitHub. Only send the exact asset on the exact network after the campaign formally opens.
 
 | Asset | Network | Receiving address |
 |---|---|---|
