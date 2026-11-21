@@ -21,7 +21,7 @@ const walletConfigured =
 
 export default function HomePage() {
   const { isConnected, address } = useAccount();
-  const [amount, setAmount] = useState("1");
+  const [amount, setAmount] = useState("");
   const [mode, setMode] = useState<"NATIVE" | "TOKEN">("NATIVE");
   const [tokenAddress, setTokenAddress] = useState("");
   const [tokenSymbol, setTokenSymbol] = useState("TOKEN");
@@ -122,7 +122,7 @@ export default function HomePage() {
         await tx.wait();
         setStatus(`${tokenSymbol} contribution confirmed. Thank you!`);
       }
-      setAmount("1");
+      setAmount("");
       await refreshBalances();
     } catch (error: any) {
       setStatus(error?.shortMessage || error?.reason || error?.message || "The transaction was not completed.");
@@ -218,7 +218,7 @@ export default function HomePage() {
           {mode === "TOKEN" && <div className="token-field"><label htmlFor="tokenAddress">Token contract address</label><input id="tokenAddress" value={tokenAddress} onChange={(event) => setTokenAddress(event.target.value)} placeholder="0x…" /><button className="text-button" onClick={detectToken} type="button">Verify token on configured network</button><small>Only use a token contract you have independently checked.</small></div>}
           <label className="field-label" htmlFor="amount">Contribution amount ({mode === "NATIVE" ? "native coin" : tokenSymbol})</label>
           <input className="amount-input" id="amount" inputMode="decimal" type="number" min="0" step="any" value={amount} onChange={(event) => setAmount(event.target.value)} />
-          <div className="quick-amounts"><button type="button" onClick={() => setAmount("1")}>1</button><button type="button" onClick={() => setAmount("0.01")}>0.01</button><button type="button" onClick={() => setAmount("0.1")}>0.1</button><span>Asset units, not USD</span></div>
+          <div className="quick-amounts"><button type="button" onClick={() => setAmount("0.001")}>0.001</button><button type="button" onClick={() => setAmount("0.01")}>0.01</button><button type="button" onClick={() => setAmount("0.1")}>0.1</button><span>Asset units, not USD</span></div>
           <button className="button button-primary donate-button" disabled={!walletConfigured} onClick={donate} type="button">Contribute with wallet <span>↗</span></button>
           {walletConfigured && <div className="address-box"><span>Campaign wallet</span><a href={`${EXPLORER_URL}${DONATION_ADDRESS}`} target="_blank" rel="noreferrer">{DONATION_ADDRESS}</a><button onClick={copyAddress} type="button">Copy address</button></div>}
           <div className="balance-row"><span>Wallet balance on configured RPC</span><b>{nativeBalance} native</b></div>
