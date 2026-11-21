@@ -87,6 +87,19 @@ export default function HomePage() {
 
       <section className="transparency-section" id="transparency"><div><div className="eyebrow">TRUST IS EARNED</div><h2>Clear goals.<br /><span>Honest updates.</span></h2></div><div className="transparency-copy"><p>We will publish verified campaign totals, development milestones and plain-language spending reports. This site does not claim a verified supporter count or amount raised yet.</p><ul><li>No fabricated progress numbers.</li><li>Public wallet addresses and transaction records will be verifiable.</li><li>Material changes to campaign scope will be disclosed.</li></ul></div></section>
 
+      <section className="share-section">
+        <div>
+          <div className="eyebrow">HELP THE COMMUNITY GROW</div>
+          <h2>Share the vision.<br /><span>Invite more builders.</span></h2>
+          <p>If you cannot contribute, sharing the campaign helps others discover the work. Contributions are not open yet; please share the vision, not a request to transfer funds today.</p>
+        </div>
+        <div className="share-actions">
+          <a className="button button-primary" target="_blank" rel="noopener noreferrer" href={`https://wa.me/?text=${encodeURIComponent("Help build open technology with QORVYNT Lang and QORVYNT Web4. Crypto Daan: One billion people, one dollar each. Voluntary community support. Contributions are not open yet. Read the campaign: https://github.com/vikash7644/crypto-daan/blob/main/DONATE.md")}`}>Share on WhatsApp ↗</a>
+          <a className="button button-quiet" target="_blank" rel="noopener noreferrer" href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("One billion people. One dollar each. Help build open technology with QORVYNT Lang and QORVYNT Web4.")}&url=${encodeURIComponent("https://github.com/vikash7644/crypto-daan/blob/main/DONATE.md")}`}>Share on X ↗</a>
+          <a className="campaign-details-link" href="https://github.com/vikash7644/crypto-daan/blob/main/DONATE.md" target="_blank" rel="noopener noreferrer">Read campaign details</a>
+        </div>
+      </section>
+
       <footer className="footer"><a className="brand" href="#"><span className="brand-mark">✳</span><span>CRYPTO <b>DAAN</b></span></a><p>Community support for open technology.</p><small>Crypto contributions are voluntary and generally irreversible after confirmation. They are not investments, deposits or purchases of equity, tokens, rewards or guaranteed returns. Donors must verify the asset, network, address and applicable local laws and taxes. No payment is confirmed by this website unless independently verified on-chain.</small><div className="footer-bottom"><span>© {new Date().getFullYear()} Crypto Daan</span><a href="#contribute">Contribute ↑</a></div></footer>
     </main>
   );
