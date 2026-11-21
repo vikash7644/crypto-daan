@@ -130,3 +130,14 @@ button{cursor:pointer}
 .share-actions .button{width:100%}
 .campaign-details-link{align-self:center;color:var(--mint);font-size:10px;padding:8px}
 @media(max-width:760px){.share-section{margin:0 20px 65px;padding:25px;grid-template-columns:1fr;gap:15px}}
+
+.faq-section{max-width:1068px;margin:0 auto 90px;padding:0 0 10px}
+.faq-section h2{font-size:clamp(30px,4vw,44px);letter-spacing:-.06em;margin:15px 0 28px}
+.faq-list{border-top:1px solid var(--line)}
+.faq-list details{border-bottom:1px solid var(--line);padding:17px 3px}
+.faq-list summary{cursor:pointer;list-style:none;font-size:12px;font-weight:800;color:#e8f0f6;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:after{content:"+";font:18px 'DM Mono',monospace;color:var(--mint)}
+.faq-list details[open] summary:after{content:"−"}
+.faq-list p{max-width:800px;color:var(--muted);font-size:11px;line-height:1.8;margin:12px 24px 0 0}
+@media(max-width:760px){.faq-section{margin:0 20px 65px}}
