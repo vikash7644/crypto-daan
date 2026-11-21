@@ -1,343 +1,119 @@
 "use client";
 
-import { useEffect, useMemo, useState } from 'react';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { ethers } from 'ethers';
-import { useAccount } from 'wagmi';
+import { useState } from "react";
 
-const DONATION_ADDRESS = process.env.NEXT_PUBLIC_DONATION_ADDRESS || '0x0000000000000000000000000000000000000000';
-const EXPLORER_URL = process.env.NEXT_PUBLIC_EXPLORER_URL || 'https://etherscan.io/address/';
-const ERC20_ABI = [
-  'function transfer(address to, uint256 amount) returns (bool)',
-  'function decimals() view returns (uint8)',
-  'function symbol() view returns (string)',
-  'function balanceOf(address) view returns (uint256)',
+const donationsEnabled = process.env.NEXT_PUBLIC_DONATIONS_ENABLED === "true";
+
+const assets = [
+  { id: "BTC", name: "Bitcoin", network: "Bitcoin network", address: process.env.NEXT_PUBLIC_BTC_ADDRESS || "bc1p8xm6dpk7lcuq3ahrdzzkfwdrt5f6xhkmezdup4trj280djht53mq5k3rkd", note: "Send BTC only. Do not send wrapped BTC or tokens." },
+  { id: "ETH", name: "Ethereum", network: "Ethereum mainnet", address: process.env.NEXT_PUBLIC_ETH_ADDRESS || "0xFb28ed92F3fDA5F5394091D909B9423A20736aB5", note: "Send ETH on Ethereum mainnet only." },
+  { id: "BNB", name: "BNB", network: "BNB Smart Chain (BEP-20)", address: process.env.NEXT_PUBLIC_BNB_ADDRESS || "0xFb28ed92F3fDA5F5394091D909B9423A20736aB5", note: "Send BNB on BNB Smart Chain only." },
+  { id: "SOL", name: "Solana", network: "Solana network", address: process.env.NEXT_PUBLIC_SOL_ADDRESS || "DydeUcxGuhPcWryskJBw3KfNceeK7LkCNmYPhLgzpg5v", note: "Send SOL on Solana network only." },
+  { id: "USDT-ERC20", name: "USDT", network: "Ethereum (ERC-20)", address: process.env.NEXT_PUBLIC_USDT_ERC20_ADDRESS || "", note: "USDT ERC-20 only. Ethereum gas fees apply." },
+  { id: "USDT-BEP20", name: "USDT", network: "BNB Smart Chain (BEP-20)", address: process.env.NEXT_PUBLIC_USDT_BEP20_ADDRESS || "", note: "USDT BEP-20 only. BNB gas fees apply." },
+  { id: "USDT-SPL", name: "USDT", network: "Solana (SPL)", address: process.env.NEXT_PUBLIC_USDT_SOL_ADDRESS || "", note: "USDT SPL only. Solana network fees apply." },
 ];
 
 export default function HomePage() {
-  const { isConnected, address } = useAccount();
-  const [donationEthBalance, setDonationEthBalance] = useState<string>('—');
-  const [donationTokenBalance, setDonationTokenBalance] = useState<string>('—');
-  const [amount, setAmount] = useState('0.01');
-  const [mode, setMode] = useState<'ETH' | 'TOKEN'>('ETH');
-  const [tokenAddress, setTokenAddress] = useState('');
-  const [tokenSymbol, setTokenSymbol] = useState('TOKEN');
-  const [tokenDecimals, setTokenDecimals] = useState(18);
-  const [status, setStatus] = useState('Ready');
+  const [selectedId, setSelectedId] = useState("BTC");
+  const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState("");
+  const selected = assets.find((asset) => asset.id === selectedId) || assets[0];
+  const configured = selected.address.trim().length > 0;
 
-  const walletAddressText = useMemo(() => {
-    if (address) return address;
-    return 'Connect wallet to donate';
-  }, [address]);
-
-  useEffect(() => {
-    fetchDonationBalances();
-  }, [mode, tokenAddress, tokenDecimals]);
-
-  async function fetchDonationBalances() {
+  async function copyAddress() {
+    if (!configured || !donationsEnabled) return;
     try {
-      const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL || 'https://polygon-rpc.com';
-      const rpcProvider = new ethers.JsonRpcProvider(rpcUrl);
-      const ethBalance = await rpcProvider.getBalance(DONATION_ADDRESS);
-      setDonationEthBalance(ethers.formatEther(ethBalance));
-
-      if (mode === 'TOKEN' && tokenAddress) {
-        const tokenContract = new ethers.Contract(tokenAddress, ERC20_ABI, rpcProvider);
-        const [symbol, decimals, rawBalance] = await Promise.all([
-          tokenContract.symbol().catch(() => 'TOKEN'),
-          tokenContract.decimals().catch(() => 18),
-          tokenContract.balanceOf(DONATION_ADDRESS),
-        ]);
-        setTokenSymbol(symbol || 'TOKEN');
-        setTokenDecimals(Number(decimals) || 18);
-        setDonationTokenBalance(ethers.formatUnits(rawBalance, Number(decimals) || 18));
-      } else {
-        setDonationTokenBalance('—');
-      }
-    } catch (err) {
-      console.error(err);
-      setDonationEthBalance('—');
-      setDonationTokenBalance('—');
+      await navigator.clipboard.writeText(selected.address);
+      setCopied(true);
+      setStatus("Address copied. Verify the first and last characters before sending.");
+      window.setTimeout(() => setCopied(false), 2200);
+    } catch {
+      setStatus("Copy failed. Select and copy the address manually.");
     }
   }
 
-  async function detectToken() {
-    if (!tokenAddress) {
-      setStatus('Please enter a token contract address.');
-      return;
-    }
-
-    try {
-      setStatus('Detecting token...');
-      const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL || 'https://polygon-rpc.com';
-      const provider = new ethers.JsonRpcProvider(rpcUrl);
-      const contract = new ethers.Contract(tokenAddress, ERC20_ABI, provider);
-      const [symbol, decimals] = await Promise.all([
-        contract.symbol().catch(() => 'TOKEN'),
-        contract.decimals().catch(() => 18),
-      ]);
-      setTokenSymbol(symbol || 'TOKEN');
-      setTokenDecimals(Number(decimals) || 18);
-      setStatus(`Token detected: ${symbol || 'TOKEN'}`);
-      await fetchDonationBalances();
-    } catch (error) {
-      console.error(error);
-      setStatus('Could not detect token. Check the contract address and network.');
-    }
-  }
-
-  async function addTokenToMetaMask() {
-    if (!tokenAddress || !tokenSymbol) {
-      setStatus('No token to add. Detect a token first.');
-      return;
-    }
-
-    if ((window as any).ethereum && (window as any).ethereum.request) {
-      try {
-        const added = await (window as any).ethereum.request({
-          method: 'wallet_watchAsset',
-          params: {
-            type: 'ERC20',
-            options: {
-              address: tokenAddress,
-              symbol: tokenSymbol,
-              decimals: tokenDecimals,
-              image: '',
-            },
-          },
-        });
-
-        if (added) {
-          setStatus(`${tokenSymbol} added to wallet.`);
-        } else {
-          setStatus('Token not added to wallet.');
-        }
-      } catch (err: any) {
-        console.error(err);
-        setStatus(err?.message || 'Could not add token to wallet.');
-      }
-    } else {
-      setStatus('No injected wallet found (MetaMask).');
-    }
-  }
-
-  async function handleDonate() {
-    if (!isConnected || !address) {
-      setStatus('Please connect your wallet first.');
-      return;
-    }
-
-    if (!amount || Number(amount) <= 0 || Number.isNaN(Number(amount))) {
-      setStatus('Enter a valid donation amount.');
-      return;
-    }
-
-    try {
-      const provider = new ethers.BrowserProvider(window.ethereum as any);
-      const signer = await provider.getSigner();
-
-      if (mode === 'ETH') {
-        setStatus('Preparing ETH donation...');
-        const tx = await signer.sendTransaction({
-          to: DONATION_ADDRESS,
-          value: ethers.parseEther(amount),
-        });
-        setStatus('Transaction sent. Waiting for confirmation...');
-        await tx.wait();
-        setStatus('ETH donation successful! Thank you.');
-      } else {
-        if (!tokenAddress) {
-          setStatus('Please enter a token contract address.');
-          return;
-        }
-
-        setStatus('Preparing token donation...');
-        const tokenContract = new ethers.Contract(tokenAddress, ERC20_ABI, signer);
-        const value = ethers.parseUnits(amount, tokenDecimals);
-        const tx = await tokenContract.transfer(DONATION_ADDRESS, value);
-        setStatus('Token transaction sent. Waiting for confirmation...');
-        await tx.wait();
-        setStatus(`Token donation successful (${tokenSymbol})! Thank you.`);
-      }
-
-      setAmount('0.01');
-      await fetchDonationBalances();
-    } catch (error: any) {
-      console.error(error);
-      setStatus(error?.message || 'Donation failed. Please try again.');
-    }
-  }
-
-  const qrSrc = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(
-    `ethereum:${DONATION_ADDRESS}`
-  )}`;
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
-      <div className="mx-auto max-w-6xl px-4 py-10">
-        <section className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-sm">
-            <div className="mb-6 flex items-center justify-between gap-4">
-              <div>
-                <p className="text-sm uppercase tracking-[0.2em] text-cyan-300">Crypto Daan</p>
-                <h1 className="mt-2 text-4xl font-bold">Direct crypto donations without KYC.</h1>
-              </div>
-              <div className="hidden sm:block">
-                <ConnectButton showBalance={false} />
-              </div>
-            </div>
+    <main className="site-shell">
+      <nav className="topbar">
+        <a className="brand" href="#"><span className="brand-mark">✳</span><span>CRYPTO <b>DAAN</b></span></a>
+        <div className="nav-links"><a href="#mission">Our mission</a><a href="#faq">FAQ</a><a href="#transparency">Transparency</a><a href="#contribute">Contribute</a></div>
+      </nav>
 
-            <div className="mb-6 overflow-hidden rounded-2xl border border-cyan-400/30 bg-cyan-400/10 p-4">
-              <p className="text-xs uppercase tracking-[0.18em] text-cyan-200">Donation wallet</p>
-              <a
-                href={`${EXPLORER_URL}${DONATION_ADDRESS}`}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-2 block break-all text-sm text-cyan-100 underline decoration-cyan-400/50 underline-offset-4"
-              >
-                {DONATION_ADDRESS}
-              </a>
+      <section className="hero">
+        <div className="hero-copy">
+          <div className="eyebrow"><span className="live-dot" /> A COMMUNITY-POWERED BUILD</div>
+          <h1>One billion people.<br /><span>One dollar each.</span><br />A future we build together.</h1>
+          <p className="hero-lede">Support open technology for the next generation: QORVYNT programming language, Web4 infrastructure and developer tools.</p>
+          <div className="hero-actions"><a className="button button-primary" href="#contribute">Choose a crypto <span>↗</span></a><a className="button button-quiet" href="#mission">Our mission</a></div>
+          <p className="hero-note">Pre-launch. Do not send funds until payment opening is announced.</p>
+        </div>
+        <div className="goal-card"><div className="goal-card-top"><span>THE COMMUNITY GOAL</span><span className="goal-icon">✳</span></div><div className="goal-number">1B</div><div className="goal-label">people × $1</div><div className="goal-divider" /><div className="goal-total"><span>Long-term campaign ambition</span><strong>$1,000,000,000</strong></div><div className="goal-foot">An aspiration, not funds raised or a guaranteed outcome.</div><div className="orbit orbit-one" /><div className="orbit orbit-two" /></div>
+      </section>
 
-              <div className="mt-4 flex items-center gap-4">
-                <div>
-                  <img src={qrSrc} alt="Donation QR" className="h-40 w-40 rounded-lg bg-white p-2" />
-                </div>
-                <div className="text-sm text-slate-200">
-                  <p className="mb-2">Share this QR or address for quick donations. It encodes the URI <code className="font-mono">ethereum:{DONATION_ADDRESS}</code>.</p>
-                  <p className="text-xs text-slate-300">Note: QR opens wallets supporting deep-links (mobile). Ensure donors use the same chain as the donation address.</p>
-                </div>
-              </div>
-            </div>
+      <section className="principles"><div><span className="principle-icon">◎</span><b>Open participation</b><small>Support only if you choose.</small></div><div><span className="principle-icon">◇</span><b>Keep ownership</b><small>Contributions do not buy equity.</small></div><div><span className="principle-icon">↗</span><b>Public progress</b><small>Publish verified updates.</small></div></section>
 
-            <div className="mb-6 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-white/10 bg-slate-900/80 p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-400">ETH balance</p>
-                <p className="mt-1 text-2xl font-semibold">{donationEthBalance}</p>
-              </div>
+      <section className="content-section" id="mission">
+        <div className="section-heading"><div className="eyebrow">THE MISSION</div><h2>Build useful technology.<br /><span>Make it accessible.</span></h2><p>Community support will help fund development, infrastructure, testing, documentation and public releases.</p></div>
+        <div className="mission-grid">
+          <article className="mission-card"><span className="card-index">01 / LANGUAGE</span><div className="mission-symbol">⌘</div><h3>QORVYNT Lang</h3><p>An independent programming language, compiler, virtual machine and developer tools.</p><span className="card-tag">Developer foundation</span></article>
+          <article className="mission-card"><span className="card-index">02 / WEB4</span><div className="mission-symbol">⌬</div><h3>QORVYNT Web4</h3><p>Agent coordination, decentralized identity, permissions and user-controlled data.</p><span className="card-tag">Open infrastructure</span></article>
+          <article className="mission-card"><span className="card-index">03 / ECOSYSTEM</span><div className="mission-symbol">✳</div><h3>Tools & applications</h3><p>SDKs, examples, documentation and practical applications for builders.</p><span className="card-tag">For builders</span></article>
+        </div>
+      </section>
 
-              <div className="rounded-2xl border border-white/10 bg-slate-900/80 p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
-                  {mode === 'TOKEN' ? `${tokenSymbol} balance` : 'Token balance'}
-                </p>
-                <p className="mt-1 text-2xl font-semibold">{donationTokenBalance}</p>
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <p className="mb-2 text-sm font-medium text-slate-200">Choose donation type</p>
-              <div className="inline-flex rounded-xl border border-white/10 bg-slate-900 p-1">
-                <button
-                  type="button"
-                  onClick={() => setMode('ETH')}
-                  className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
-                    mode === 'ETH' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300 hover:text-white'
-                  }`}
-                >
-                  ETH / native coin
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setMode('TOKEN')}
-                  className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
-                    mode === 'TOKEN' ? 'bg-cyan-500 text-slate-950' : 'text-slate-300 hover:text-white'
-                  }`}
-                >
-                  ERC-20 token
-                </button>
-              </div>
-            </div>
-
-            {mode === 'TOKEN' && (
-              <div className="mb-6 rounded-2xl border border-white/10 bg-slate-900/80 p-4">
-                <label className="mb-2 block text-sm font-medium text-slate-200">Token contract address</label>
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <input
-                    type="text"
-                    value={tokenAddress}
-                    onChange={(event) => setTokenAddress(event.target.value)}
-                    placeholder="0x..."
-                    className="w-full rounded-xl border border-white/10 bg-slate-950 px-3 py-2 text-white outline-none ring-0 placeholder:text-slate-500 focus:border-cyan-400"
-                  />
-                  <button
-                    type="button"
-                    onClick={detectToken}
-                    className="rounded-xl bg-violet-500 px-4 py-2 font-medium text-white transition hover:bg-violet-400"
-                  >
-                    Detect token
-                  </button>
-                </div>
-                <p className="mt-2 text-xs text-slate-400">Detected token: {tokenSymbol} • decimals: {tokenDecimals}</p>
-
-                <div className="mt-3 flex gap-2">
-                  <button onClick={addTokenToMetaMask} className="rounded-md bg-emerald-500 px-3 py-2 text-sm font-medium text-slate-950">Add token to MetaMask</button>
-                  <button onClick={() => { setTokenAddress(''); setTokenSymbol('TOKEN'); setTokenDecimals(18); setDonationTokenBalance('—') }} className="rounded-md bg-slate-800 px-3 py-2 text-sm">Clear</button>
-                </div>
-              </div>
-            )}
-
-            <div className="mb-6">
-              <label className="mb-2 block text-sm font-medium text-slate-200">
-                Amount ({mode === 'ETH' ? 'ETH' : tokenSymbol})
-              </label>
-              <input
-                type="number"
-                min="0"
-                step="any"
-                value={amount}
-                onChange={(event) => setAmount(event.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-slate-900 px-4 py-3 text-lg text-white outline-none placeholder:text-slate-500 focus:border-cyan-400"
-                placeholder="0.01"
-              />
-            </div>
-
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <button
-                type="button"
-                onClick={handleDonate}
-                className="flex-1 rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300"
-              >
-                Donate now
-              </button>
-              <button
-                type="button"
-                onClick={() => navigator.clipboard.writeText(DONATION_ADDRESS)}
-                className="rounded-xl border border-white/10 bg-slate-900 px-5 py-3 font-medium text-white transition hover:border-cyan-400 hover:text-cyan-200"
-              >
-                Copy address
-              </button>
-            </div>
-
-            <div className="mt-6 rounded-xl border border-white/10 bg-slate-900/80 p-4 text-sm text-slate-300">
-              <p className="font-medium text-slate-200">Status:</p>
-              <p className="mt-1">{status}</p>
-            </div>
+      <section className="contribute-section" id="contribute">
+        <div className="contribute-copy"><div className="eyebrow">GLOBAL CRYPTO SUPPORT</div><h2>Choose your crypto.<br /><span>Support the build.</span></h2><p>Choose the exact asset and network below. Receiving addresses are shown for review; transfers remain disabled until the campaign is formally opened. The $1 idea is a suggested contribution concept; crypto amounts vary with exchange rates and network fees.</p><div className="wallet-safety"><span>⌑</span><p><b>Important safety check</b><br />Always match the coin and network. Never send BTC to an EVM address or USDT on a different network. Never share your seed phrase or private key.</p></div></div>
+        <div className="donation-card">
+          <div className="donation-card-heading"><div><span className="eyebrow">CRYPTO CONTRIBUTION</span><h3>Payment options preview</h3></div><span className="secure-mark">◇</span></div>
+          <label className="field-label" htmlFor="asset">Coin and network</label>
+          <select id="asset" className="asset-select" value={selectedId} onChange={(event) => { setSelectedId(event.target.value); setStatus(""); }}>
+            <optgroup label="Native coins"><option value="BTC">BTC · Bitcoin</option><option value="ETH">ETH · Ethereum</option><option value="BNB">BNB · BNB Smart Chain</option><option value="SOL">SOL · Solana</option></optgroup>
+            <optgroup label="USDT — select the exact network"><option value="USDT-ERC20">USDT · Ethereum (ERC-20)</option><option value="USDT-BEP20">USDT · BNB Smart Chain (BEP-20)</option><option value="USDT-SPL">USDT · Solana (SPL)</option></optgroup>
+          </select>
+          <div className="selected-asset"><div className="coin-symbol">{selected.id.startsWith("USDT") ? "₮" : selected.id === "BTC" ? "₿" : selected.id === "ETH" ? "Ξ" : selected.id === "BNB" ? "◆" : "◎"}</div><div><b>{selected.name}</b><small>{selected.network}</small></div><span className="network-pill">{selected.id}</span></div>
+          {!configured ? <div className="setup-alert"><b>{selected.name} address not configured</b><span>Donations for this option are disabled until the owner adds and verifies the correct receiving address. No payment should be sent to an unverified address.</span></div> : <div className="address-box"><span>Campaign receiving address — supplied from Phantom wallet</span><code>{selected.address}</code><button className="button button-primary copy-button" onClick={copyAddress} type="button" disabled={!donationsEnabled}>{!donationsEnabled ? "Contributions not open" : copied ? "Copied ✓" : "Copy address"}</button></div>}
+          <p className="network-warning">{selected.note}</p>
+          <div className="status-message" role="status">{status || "Pre-launch: do not send funds until the campaign confirms that payments are open."}</div>
+          <div className="pending-wallet">
+            <span className="eyebrow">ADDITIONAL PHANTOM ADDRESS</span>
+            <code>CrvhxxxYenSVM1p7DBymnTqhAxc9oipRtGKyNNwih4EY</code>
+            <small>This address was also supplied from Phantom. Its exact asset and network are not confirmed yet, so it is displayed for transparency only. Do not send funds to it until the campaign labels it for a specific asset and network.</small>
           </div>
+          <p className="form-disclaimer">This campaign is in pre-launch review. Do not transfer funds yet. Payment tracking, receipts and on-chain verification are not active; this website does not collect transaction hashes or donor emails.</p>
+        </div>
+      </section>
 
-          <aside className="rounded-3xl border border-white/10 bg-slate-900/80 p-6">
-            <p className="text-sm uppercase tracking-[0.2em] text-violet-300">Wallet</p>
-            <div className="mt-4 rounded-2xl border border-white/10 bg-slate-950 p-4">
-              <ConnectButton />
-            </div>
+      <section className="faq-section" id="faq">
+        <div className="eyebrow">QUESTIONS, ANSWERED</div>
+        <h2>Before you support.</h2>
+        <div className="faq-list">
+          <details><summary>What will Crypto Daan support?</summary><p>Voluntary community support is intended for QORVYNT Lang, QORVYNT Web4, developer tools, software testing, documentation and infrastructure.</p></details>
+          <details><summary>Is one dollar required?</summary><p>No. The one-dollar idea is a campaign concept, not a minimum, fixed contribution, or promise that any exchange-rate amount equals exactly one US dollar.</p></details>
+          <details><summary>Has one billion dollars been raised?</summary><p>No. One billion dollars is a long-term campaign ambition. No verified total or supporter count is being claimed on this website.</p></details>
+          <details><summary>Can I send crypto right now?</summary><p>No. The campaign is in pre-launch review. Do not transfer funds until the website explicitly announces that contributions are open and the exact asset/network has been verified.</p></details>
+          <details><summary>Do contributors receive equity or financial returns?</summary><p>No. Contributions are voluntary support and do not provide equity, ownership, tokens, repayment, rewards, or guaranteed financial returns.</p></details>
+          <details><summary>Can a confirmed crypto transfer be reversed?</summary><p>Usually not. Blockchain transfers are generally irreversible, so always verify the asset, network, address and amount before confirming.</p></details>
+        </div>
+      </section>
 
-            <div className="mt-6 space-y-3 text-sm text-slate-300">
-              <div className="rounded-2xl border border-white/10 bg-slate-950 p-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Connected wallet</p>
-                <p className="mt-2 break-all font-mono text-xs text-cyan-200">{walletAddressText}</p>
-              </div>
+      <section className="transparency-section" id="transparency"><div><div className="eyebrow">TRUST IS EARNED</div><h2>Clear goals.<br /><span>Honest updates.</span></h2></div><div className="transparency-copy"><p>We will publish verified campaign totals, development milestones and plain-language spending reports. This site does not claim a verified supporter count or amount raised yet.</p><ul><li>No fabricated progress numbers.</li><li>Public wallet addresses and transaction records will be verifiable.</li><li>Material changes to campaign scope will be disclosed.</li></ul></div></section>
 
-              <div className="rounded-2xl border border-white/10 bg-slate-950 p-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Notes</p>
-                <ul className="mt-2 list-inside list-disc space-y-1">
-                  <li>No donor KYC required on this page.</li>
-                  <li>Donors send directly from their wallet.</li>
-                  <li>Token donations use the token’s transfer() method.</li>
-                  <li>Fiat conversion later may trigger KYC.</li>
-                </ul>
-              </div>
-            </div>
-          </aside>
-        </section>
-      </div>
+      <section className="share-section">
+        <div>
+          <div className="eyebrow">HELP THE COMMUNITY GROW</div>
+          <h2>Share the vision.<br /><span>Invite more builders.</span></h2>
+          <p>If you cannot contribute, sharing the campaign helps others discover the work. Contributions are not open yet; please share the vision, not a request to transfer funds today.</p>
+        </div>
+        <div className="share-actions">
+          <a className="button button-primary" target="_blank" rel="noopener noreferrer" href={`https://wa.me/?text=${encodeURIComponent("Help build open technology with QORVYNT Lang and QORVYNT Web4. Crypto Daan: One billion people, one dollar each. Voluntary community support. Contributions are not open yet. Read the campaign: https://github.com/vikash7644/crypto-daan/blob/main/DONATE.md")}`}>Share on WhatsApp ↗</a>
+          <a className="button button-quiet" target="_blank" rel="noopener noreferrer" href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("One billion people. One dollar each. Help build open technology with QORVYNT Lang and QORVYNT Web4.")}&url=${encodeURIComponent("https://github.com/vikash7644/crypto-daan/blob/main/DONATE.md")}`}>Share on X ↗</a>
+          <a className="campaign-details-link" href="https://github.com/vikash7644/crypto-daan/blob/main/DONATE.md" target="_blank" rel="noopener noreferrer">Read campaign details</a>
+        </div>
+      </section>
+
+      <footer className="footer"><a className="brand" href="#"><span className="brand-mark">✳</span><span>CRYPTO <b>DAAN</b></span></a><p>Community support for open technology.</p><small>Crypto contributions are voluntary and generally irreversible after confirmation. They are not investments, deposits or purchases of equity, tokens, rewards or guaranteed returns. Donors must verify the asset, network, address and applicable local laws and taxes. No payment is confirmed by this website unless independently verified on-chain.</small><div className="footer-bottom"><span>© {new Date().getFullYear()} Crypto Daan</span><a href="#contribute">Contribute ↑</a></div></footer>
     </main>
   );
 }
