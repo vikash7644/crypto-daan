@@ -1,6 +1,10 @@
 # Crypto Daan
 
-A no-KYC, direct crypto donation website starter built with Next.js, Ethereum wallet connection, RainbowKit, and ERC-20 token support.
+A community campaign supporting open technology: QORVYNT Lang, QORVYNT Web4, and developer tools.
+
+**Want to support the work? Read [DONATE.md](./DONATE.md) for the campaign message, owner-supplied receiving addresses, network warnings, and transparency notes.**
+
+The campaign is voluntary; contributions do not provide equity or financial returns. Wallet addresses are owner-supplied and must be checked carefully before sending.
 
 ## Features
 - Connect wallet with RainbowKit (MetaMask, WalletConnect, etc.)
