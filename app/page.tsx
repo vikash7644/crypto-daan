@@ -173,10 +173,23 @@ export default function HomePage() {
   )}`;
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <main id="top" className="min-h-screen bg-slate-950 text-white">
+      <div className="mx-auto max-w-6xl px-4 pt-8">
+        <section className="relative overflow-hidden rounded-3xl border border-violet-400/40 bg-gradient-to-r from-indigo-950 via-slate-950 to-violet-950 p-5 shadow-2xl sm:p-8">
+          <div className="grid items-center gap-6 md:grid-cols-[minmax(0,1fr)_minmax(220px,320px)]">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.28em] text-cyan-300">Support open source • Build the future</p>
+              <h1 className="mt-3 text-3xl font-black tracking-tight sm:text-5xl">Small contributions. <span className="text-violet-300">Big possibilities.</span></h1>
+              <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300 sm:text-base">Help fund independent open technology, developer tools and the QORVYNT vision. Every contribution is voluntary.</p>
+              <a href="#donate" className="mt-5 inline-flex rounded-full bg-violet-500 px-6 py-3 font-bold text-white shadow-lg shadow-violet-950/60 transition hover:bg-violet-400">♥ Donate to the mission</a>
+            </div>
+            <img src="/crypto-daan-mascot.svg" alt="Crypto Daan cartoon mascot holding a Bitcoin coin and giving a thumbs up" className="mx-auto w-full max-w-[280px] drop-shadow-[0_0_28px_rgba(139,92,246,0.45)]" />
+          </div>
+        </section>
+      </div>
       <div className="mx-auto max-w-6xl px-4 py-10">
         <section className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-sm">
+          <div id="donate" className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-sm">
             <div className="mb-6 flex items-center justify-between gap-4">
               <div>
                 <p className="text-sm uppercase tracking-[0.2em] text-cyan-300">Crypto Daan</p>
