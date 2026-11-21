@@ -25,6 +25,10 @@ Each asset/network has its own receiving-address setting. The campaign owner sup
 
 These are owner-supplied, not independently ownership-verified. The BNB address is the address explicitly supplied for BNB Smart Chain. The ETH address is only for Ethereum. No USDT address has been supplied, so USDT options stay disabled. The additional Phantom address is not assigned to any asset/network until its intended use is confirmed. The campaign owner has stated that all supplied wallet addresses are from Phantom. Test each network with a small transfer and inspect the transaction on the correct explorer before announcing that donations are live.
 
+## Pre-launch payment safety gate
+
+`NEXT_PUBLIC_DONATIONS_ENABLED` defaults to `false`. While false, the website displays the owner-supplied wallet addresses for review but disables the copy-to-send action and clearly tells visitors not to transfer funds. Keep it false until wallet control is verified, small test transfers are confirmed on each exact network, and qualified legal/tax/compliance review is complete. Only then may the campaign owner deliberately set it to `true` in the hosting environment and redeploy.
+
 ## Configure receiving addresses before launch
 
 Set these environment variables in the hosting provider, using addresses controlled by the campaign owner and verified with test transfers:
