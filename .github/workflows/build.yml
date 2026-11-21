@@ -1,4 +1,4 @@
-name: Build
+name: Crypto Daan Build
 
 on:
   workflow_dispatch:
