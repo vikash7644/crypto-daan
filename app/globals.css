@@ -119,3 +119,5 @@ button{cursor:pointer}
 .pending-wallet code{font:10px 'DM Mono',monospace;color:#ddd5ff;overflow-wrap:anywhere;line-height:1.7}
 .pending-wallet small,.form-disclaimer{font-size:9px;line-height:1.75;color:#929eac}
 .form-disclaimer{margin:15px 0 0}
+
+.copy-button:disabled{opacity:.5;cursor:not-allowed;transform:none}
