@@ -27,9 +27,16 @@ The campaign owner confirms that all addresses listed here were supplied from th
 
 This additional address was supplied from the campaign owner's Phantom wallet. Its exact payment designation has not yet been confirmed, so **do not send funds to this address until the campaign publishes the matching asset and network**.
 
-### USDT
+### USDT receiving addresses
 
-USDT contributions are not enabled yet. Do not send USDT to the ETH, BNB, or SOL addresses above unless a separate instruction explicitly identifies the correct USDT token contract and network.
+The campaign owner supplied the same EVM wallet address for USDT on both Ethereum and BNB Smart Chain. EVM addresses can be the same across these networks, but the token and network must still match exactly. These addresses are owner-supplied and have not been independently ownership-verified.
+
+| Asset | Network | Receiving address |
+|---|---|---|
+| USDT | Ethereum (ERC-20) | `0xFb28ed92F3fDA5F5394091D909B9423A20736aB5` |
+| USDT | BNB Smart Chain (BEP-20) | `0xFb28ed92F3fDA5F5394091D909B9423A20736aB5` |
+
+USDT on Solana (SPL) is not configured. Do not send USDT on Solana or any other network. Before any transfer after an official launch, independently verify the official USDT token contract for the selected network and confirm the receiving address in the campaign website.
 
 ## Before contributing
 
