@@ -21,7 +21,7 @@ Only send the exact asset on the exact network shown below. These public address
 
 `CrvhxxxYenSVM1p7DBymnTqhAxc9oipRtGKyNNwih4EY`
 
-This additional address was also supplied from the campaign owner's Phantom wallet. Its exact payment designation has not yet been confirmed, so **do not send funds to this address until the campaign publishes the matching asset and network**.
+This additional address was supplied from the campaign owner's Phantom wallet. Its exact payment designation has not yet been confirmed, so **do not send funds to this address until the campaign publishes the matching asset and network**.
 
 ### USDT
 
