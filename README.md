@@ -1,16 +1,26 @@
 # Crypto Daan
 
-**Website:** https://vikash7644.github.io/crypto-daan/ (GitHub Pages deployment must be enabled in repository Settings → Pages → Source: GitHub Actions.)
+**Website:** https://vikash7644.github.io/crypto-daan/
 
 **One billion people. One dollar each. A future we build together.**
 
-Crypto Daan is a voluntary community-support campaign concept for open technology projects, including QORVYNT language tooling and developer infrastructure. The one-billion/one-dollar line is an aspirational campaign idea—not a fundraising result, forecast, or promise.
+Crypto Daan is a voluntary community-support campaign concept for open technology projects, including QORVYNT Lang, QORVYNT Web4 and developer tools. The one-billion/one-dollar line is an aspirational campaign idea—not a fundraising result, forecast, or promise.
 
 ## Current status: pre-launch
 
-**Do not send cryptocurrency. Contributions are not being accepted.** The website has no active payment controls. Wallet ownership, network-specific test transfers and applicable legal/tax/compliance requirements have not been independently verified or completed.
+**Do not send cryptocurrency. Contributions are not being accepted.** The website displays owner-supplied receiving addresses for transparency only. Wallet ownership, exact token contracts, network-specific test transfers and applicable legal/tax/compliance requirements have not all been independently verified or completed.
 
-Do not use old wallet addresses, screenshots, copied instructions or third-party messages as payment instructions. The campaign will publish exact asset/network instructions only after verification and an explicit launch announcement.
+The payment selector on the static website lists these routes:
+
+- BTC — Bitcoin
+- ETH — Ethereum
+- BNB — BNB Smart Chain
+- SOL — Solana
+- USDT — Ethereum (ERC-20) and BNB Smart Chain (BEP-20)
+- USDT / USDT0 — Arbitrum One, Monad and Polygon
+- USDT — Tron (TRC-20)
+
+The addresses and network-specific warnings are documented in [DONATE.md](./DONATE.md). An address being displayed does not mean that the token contract or network has been verified. Do not transfer funds until the campaign completes its checks and explicitly announces that contributions are open.
 
 ## What the campaign intends to support
 
@@ -24,11 +34,14 @@ These are intended categories, not a published budget or a claim that funds have
 ## Partnerships and sponsorship
 
 For infrastructure, engineering, security, community or ecosystem partnership discussions, open an issue in this repository:
+
 https://github.com/vikash7644/crypto-daan/issues/new
 
 See [docs/FUNDING_AND_SPONSORS.md](./docs/FUNDING_AND_SPONSORS.md) for a researched grant shortlist and application-readiness checklist. No grant application is represented as submitted or approved.
 
 ## Development
+
+The GitHub Pages website is the static `index.html` at the repository root. The separate Next.js application lives in `app/`.
 
 ```bash
 npm install
@@ -44,4 +57,4 @@ Public and cross-border fundraising can trigger legal, tax, foreign-contribution
 
 ## GitHub Pages deployment
 
-The static site is published from the repository root by `.github/workflows/deploy-pages.yml`. In repository Settings → Pages, select **GitHub Actions** as the publishing source. A push to `main` triggers the deployment workflow; the workflow checks that `index.html` exists, uploads the site, and publishes it. Check the [Actions runs](https://github.com/vikash7644/crypto-daan/actions) page for the deployment result before treating the public URL as live.
+The static site is published from the repository root by `.github/workflows/deploy-pages.yml`. Pushes to `main` run the workflow, which verifies `index.html`, uploads the site artifact and deploys it to GitHub Pages. See [GitHub Actions](https://github.com/vikash7644/crypto-daan/actions) for the latest run and deployment result.
