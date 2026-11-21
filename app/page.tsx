@@ -85,6 +85,19 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="faq-section" id="faq">
+        <div className="eyebrow">QUESTIONS, ANSWERED</div>
+        <h2>Before you support.</h2>
+        <div className="faq-list">
+          <details><summary>What will Crypto Daan support?</summary><p>Voluntary community support is intended for QORVYNT Lang, QORVYNT Web4, developer tools, software testing, documentation and infrastructure.</p></details>
+          <details><summary>Is one dollar required?</summary><p>No. The one-dollar idea is a campaign concept, not a minimum, fixed contribution, or promise that any exchange-rate amount equals exactly one US dollar.</p></details>
+          <details><summary>Has one billion dollars been raised?</summary><p>No. One billion dollars is a long-term campaign ambition. No verified total or supporter count is being claimed on this website.</p></details>
+          <details><summary>Can I send crypto right now?</summary><p>No. The campaign is in pre-launch review. Do not transfer funds until the website explicitly announces that contributions are open and the exact asset/network has been verified.</p></details>
+          <details><summary>Do contributors receive equity or financial returns?</summary><p>No. Contributions are voluntary support and do not provide equity, ownership, tokens, repayment, rewards, or guaranteed financial returns.</p></details>
+          <details><summary>Can a confirmed crypto transfer be reversed?</summary><p>Usually not. Blockchain transfers are generally irreversible, so always verify the asset, network, address and amount before confirming.</p></details>
+        </div>
+      </section>
+
       <section className="transparency-section" id="transparency"><div><div className="eyebrow">TRUST IS EARNED</div><h2>Clear goals.<br /><span>Honest updates.</span></h2></div><div className="transparency-copy"><p>We will publish verified campaign totals, development milestones and plain-language spending reports. This site does not claim a verified supporter count or amount raised yet.</p><ul><li>No fabricated progress numbers.</li><li>Public wallet addresses and transaction records will be verifiable.</li><li>Material changes to campaign scope will be disclosed.</li></ul></div></section>
 
       <section className="share-section">
