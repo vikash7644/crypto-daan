@@ -35,7 +35,7 @@ export default function HomePage() {
   return (
     <main className="site-shell">
       <nav className="topbar">
-        <a className="brand" href="#"><span className="brand-mark">₿</span><span>CRYPTO <b>DAAN</b></span></a>
+        <a className="brand" href="#"><span className="brand-mark">✳</span><span>CRYPTO <b>DAAN</b></span></a>
         <div className="nav-links"><a href="#mission">Our mission</a><a href="#transparency">Transparency</a><a href="#contribute">Contribute</a></div>
       </nav>
 
@@ -85,7 +85,7 @@ export default function HomePage() {
 
       <section className="transparency-section" id="transparency"><div><div className="eyebrow">TRUST IS EARNED</div><h2>Clear goals.<br /><span>Honest updates.</span></h2></div><div className="transparency-copy"><p>We will publish verified campaign totals, development milestones and plain-language spending reports. This site does not claim a verified supporter count or amount raised yet.</p><ul><li>No fabricated progress numbers.</li><li>Public wallet addresses and transaction records will be verifiable.</li><li>Material changes to campaign scope will be disclosed.</li></ul></div></section>
 
-      <footer className="footer"><a className="brand" href="#"><span className="brand-mark">₿</span><span>CRYPTO <b>DAAN</b></span></a><p>Community support for open technology.</p><small>Crypto contributions are voluntary and generally irreversible after confirmation. They are not investments, deposits or purchases of equity, tokens, rewards or guaranteed returns. Donors must verify the asset, network, address and applicable local laws and taxes. No payment is confirmed by this website unless independently verified on-chain.</small><div className="footer-bottom"><span>© {new Date().getFullYear()} Crypto Daan</span><a href="#contribute">Contribute ↑</a></div></footer>
+      <footer className="footer"><a className="brand" href="#"><span className="brand-mark">✳</span><span>CRYPTO <b>DAAN</b></span></a><p>Community support for open technology.</p><small>Crypto contributions are voluntary and generally irreversible after confirmation. They are not investments, deposits or purchases of equity, tokens, rewards or guaranteed returns. Donors must verify the asset, network, address and applicable local laws and taxes. No payment is confirmed by this website unless independently verified on-chain.</small><div className="footer-bottom"><span>© {new Date().getFullYear()} Crypto Daan</span><a href="#contribute">Contribute ↑</a></div></footer>
     </main>
   );
 }
