@@ -4,6 +4,8 @@
 
 Crypto Daan is a voluntary community-support campaign for the QORVYNT open-technology vision: QORVYNT Lang, QORVYNT Web4 and developer tools. The $1 figure is an invitation/illustrative ambition, not a required amount, funds raised, forecast or guaranteed outcome. Contributions do not provide equity, ownership, tokens, rewards or financial return.
 
+**Support the campaign:** see [DONATE.md](./DONATE.md) for the public contribution request, receiving addresses, network-specific warnings, and transparency information.
+
 ## Supported payment choices in the UI
 
 - BTC — Bitcoin network
