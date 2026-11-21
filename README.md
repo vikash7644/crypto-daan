@@ -41,3 +41,7 @@ npm run build
 Crypto transfers are generally irreversible. Never share a seed phrase, recovery phrase or private key. This campaign is not represented as a registered charity or tax-exempt organization. Contributions do not provide equity, ownership, tokens, repayment, rewards or financial returns. Do not claim tax deductibility.
 
 Public and cross-border fundraising can trigger legal, tax, foreign-contribution, consumer-protection and virtual-digital-asset rules. Obtain qualified jurisdiction-specific advice before soliciting or accepting contributions. This repository is not legal, tax, investment or custody advice.
+
+## GitHub Pages deployment
+
+The static site is published from the repository root by `.github/workflows/deploy-pages.yml`. In repository Settings → Pages, select **GitHub Actions** as the publishing source. A push to `main` triggers the deployment workflow; the workflow checks that `index.html` exists, uploads the site, and publishes it. Check the [Actions runs](https://github.com/vikash7644/crypto-daan/actions) page for the deployment result before treating the public URL as live.
