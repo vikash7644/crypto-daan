@@ -2,29 +2,41 @@
 
 **Campaign idea: One billion people. One dollar each. A future we build together.**
 
-Crypto Daan is a community-support website for the QORVYNT open-technology vision: QORVYNT Lang, QORVYNT Web4, and developer tools. The $1 figure is an illustrative invitation, not a required amount. Contributions are voluntary and do not provide equity, ownership, tokens, rewards, or a financial return.
+Crypto Daan is a voluntary community-support campaign for the QORVYNT open-technology vision: QORVYNT Lang, QORVYNT Web4 and developer tools. The $1 figure is an invitation/illustrative ambition, not a required amount, funds raised, forecast or guaranteed outcome. Contributions do not provide equity, ownership, tokens, rewards or financial return.
 
-## Current implementation
+## Supported payment choices in the UI
 
-- Next.js 14 app with responsive campaign landing page.
-- RainbowKit / wagmi wallet connection for supported EVM wallets.
-- Native-coin and manually specified ERC-20 contribution flow.
-- Token contract lookup against the configured RPC.
-- Campaign wallet display and copy action.
-- Campaign-wallet configuration guard: transfers are disabled until a valid non-zero wallet address is configured.
-- No fabricated supporter counter or raised-amount progress display.
+- BTC — Bitcoin network
+- ETH — Ethereum mainnet
+- BNB — BNB Smart Chain
+- SOL — Solana
+- USDT — Ethereum (ERC-20), BNB Smart Chain (BEP-20), and Solana (SPL)
 
-## Configure before accepting contributions
+Each asset/network has its own separately configured receiving address. The UI deliberately shows an unconfigured warning and does not enable a payment flow for an empty address. Never paste one network's address into another network's setting unless the receiving wallet explicitly supports it.
 
-1. Set `NEXT_PUBLIC_DONATION_ADDRESS` in the hosting provider to a wallet you control and have independently verified.
-2. Set `NEXT_PUBLIC_RPC_URL` to an RPC endpoint for the network you intend to use.
-3. Set `NEXT_PUBLIC_EXPLORER_URL` to that network's address explorer prefix.
-4. Set a real `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID` for WalletConnect support.
-5. Confirm the configured network, destination address, token contract and test transaction before announcing the site.
+## Configure receiving addresses before launch
 
-**Important:** The app currently supports the native coin and ERC-20 tokens on the configured EVM network. It does not convert $1 USD into a crypto amount automatically. Donors must review the asset, network, amount, destination and gas fee in their wallet before approving.
+Set these environment variables in the hosting provider, using addresses controlled by the campaign owner and verified with test transfers:
 
-## Local development
+- `NEXT_PUBLIC_BTC_ADDRESS`
+- `NEXT_PUBLIC_ETH_ADDRESS`
+- `NEXT_PUBLIC_BNB_ADDRESS`
+- `NEXT_PUBLIC_SOL_ADDRESS`
+- `NEXT_PUBLIC_USDT_ERC20_ADDRESS`
+- `NEXT_PUBLIC_USDT_BEP20_ADDRESS`
+- `NEXT_PUBLIC_USDT_SOL_ADDRESS`
+
+After adding/changing variables, redeploy. Confirm the exact network and asset on a block explorer before publishing the campaign.
+
+## Important implementation limitations
+
+- This version provides asset/network selection and copy-address instructions only.
+- It does not yet generate QR codes, monitor incoming transactions, calculate a live USD equivalent, or maintain a verified donor/raised-total counter.
+- The optional transaction-reference form is front-end only and does not submit to a backend or verify payment.
+- A transaction hash is not proof of successful receipt until independently checked on the correct chain.
+- Do not announce that donations are enabled until all addresses, network instructions, legal requirements and test transfers are verified.
+
+## Development
 
 ```bash
 npm install
@@ -32,12 +44,8 @@ cp .env.example .env.local
 npm run dev
 ```
 
-## Deploy
+## Legal, tax and safety
 
-Import this repository into Vercel and configure the environment variables above. Redeploy after changing environment variables.
+Crypto transfers are generally irreversible after confirmation. Donors must verify coin, network, receiving address, amount and network fee. Never ask donors for seed phrases or private keys. Do not describe contributions as tax-deductible unless that status has been independently established.
 
-## Transparency and legal notes
-
-The $1 billion figure is a long-term campaign ambition, not funds raised, a forecast, or a guarantee. Publish verified on-chain totals and clear spending reports before making progress claims. Crypto transactions are generally irreversible after confirmation. Donors should check applicable laws and tax rules. Do not describe contributions as tax-deductible unless that status has been independently established.
-
-This project is a software starter, not legal, tax, investment, or custody advice. A public donation campaign may trigger local fundraising, tax, foreign-contribution, consumer-protection or virtual-digital-asset rules. Obtain jurisdiction-specific advice before accepting public contributions, especially cross-border contributions.
+A public crypto donation campaign may trigger fundraising, tax, foreign-contribution, consumer-protection or virtual-digital-asset rules depending on the campaign operator and donor locations. Obtain qualified jurisdiction-specific advice before accepting public contributions, especially cross-border contributions. This software is not legal, tax, investment or custody advice.
