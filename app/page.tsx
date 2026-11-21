@@ -8,7 +8,7 @@ export default function HomePage() {
               <p className="text-xs font-bold uppercase tracking-[0.28em] text-cyan-300">Support open source • Build the future</p>
               <h1 className="mt-3 text-3xl font-black tracking-tight sm:text-5xl">Small contributions. <span className="text-violet-300">Big possibilities.</span></h1>
               <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300 sm:text-base">Help fund independent open technology, developer tools and the QORVYNT vision. Every contribution is voluntary.</p>
-              <a href="#donate" className="mt-5 inline-flex rounded-full bg-violet-500 px-6 py-3 font-bold text-white shadow-lg shadow-violet-950/60 transition hover:bg-violet-400">♥ Donate to the mission</a>
+              <a href="#donate" className="mt-5 inline-flex rounded-full bg-violet-500 px-6 py-3 font-bold text-white shadow-lg shadow-violet-950/60 transition hover:bg-violet-400">Explore the mission</a>
             </div>
             <img src="/crypto-daan-mascot.svg" alt="Crypto Daan cartoon mascot holding a Bitcoin coin and giving a thumbs up" className="mx-auto w-full max-w-[280px] drop-shadow-[0_0_28px_rgba(139,92,246,0.45)]" />
           </div>
