@@ -21,9 +21,9 @@ Each asset/network has its own receiving-address setting. The campaign owner sup
 - BNB (BNB Smart Chain): `0xFb28ed92F3fDA5F5394091D909B9423A20736aB5`
 - SOL: `DydeUcxGuhPcWryskJBw3KfNceeK7LkCNmYPhLgzpg5v`
 - USDT: no receiving address supplied yet; all USDT network options remain disabled.
-- An additional Phantom wallet address was supplied separately; its intended asset/token and network must be confirmed before configuration.
+- Additional Phantom address: `CrvhxxxYenSVM1p7DBymnTqhAxc9oipRtGKyNNwih4EY` — displayed for transparency, but its asset/network designation is pending confirmation.
 
-These are owner-supplied, not independently ownership-verified. The BNB address is the address explicitly supplied for BNB Smart Chain. The ETH address is only for Ethereum. No USDT address has been supplied, so USDT options stay disabled. The additional Phantom address is not assigned to any asset/network until its intended use is confirmed. Test each network with a small transfer and inspect the transaction on the correct explorer before announcing that donations are live.
+These are owner-supplied, not independently ownership-verified. The BNB address is the address explicitly supplied for BNB Smart Chain. The ETH address is only for Ethereum. No USDT address has been supplied, so USDT options stay disabled. The additional Phantom address is not assigned to any asset/network until its intended use is confirmed. The campaign owner has stated that all supplied wallet addresses are from Phantom. Test each network with a small transfer and inspect the transaction on the correct explorer before announcing that donations are live.
 
 ## Configure receiving addresses before launch
 
@@ -43,7 +43,7 @@ After adding/changing variables, redeploy. Confirm the exact network and asset o
 
 - This version provides asset/network selection and copy-address instructions only.
 - It does not yet generate QR codes, monitor incoming transactions, calculate a live USD equivalent, or maintain a verified donor/raised-total counter.
-- The optional transaction-reference form is front-end only and does not submit to a backend or verify payment.
+- Payment tracking, donor receipts, QR generation and on-chain payment verification are not active yet; the website does not collect transaction hashes or donor emails.
 - A transaction hash is not proof of successful receipt until independently checked on the correct chain.
 - Do not announce that donations are enabled until all addresses, network instructions, legal requirements and test transfers are verified.
 
