@@ -6,21 +6,24 @@ This is a research shortlist, not a claim that any application has been submitte
 
 ## Priority 1 — FOSS United project grant (India)
 
-- Official program: https://www.fossunited.org/grants
+- Official program: https://platform.fossunited.org/grants
 - Project application information: https://docs.fossunited.org/grants/
 - Contact: grants@fossunited.org
+- Current grant documentation states a maximum grant of ₹6 lakh. Confirm the current cap and terms with FOSS United before budgeting.
 - Fit: strong thematic fit. FOSS United explicitly says it has supported developer tools and new programming languages, as well as individual maintainers and projects in India.
 - Evidence to prepare: public source repository, clear OSI-approved license, release/build instructions, passing CI, roadmap with measurable milestones, usage/adoption evidence, itemised budget and a short explanation of why maintainer time is needed.
 - Note: published grant amounts and limits may vary by program page and call; ask FOSS United to confirm the current cap before setting a request.
 
 ## Priority 2 — NLnet CodeSupply (open internet / software supply chain)
 
-- Official call: https://nlnet.nl/CodeSupply/
+- Official call: https://nlnet.nl/codesupply/
 - General eligibility: https://nlnet.nl/funding.html
+- Important geographic constraint: NLnet's call has a European-dimension requirement; the call materials generally expect at least 60% of funding to go to people in eligible European countries. An India-based solo applicant without an eligible European team/budget should treat this as a low-priority / likely poor-fit opportunity and ask NLnet directly before investing time.
 - Call page reviewed 2026-11-21 says proposals of €5,000–€50,000; the second call opened 2026-11-03 and closes 2027-01-03 at 12:00 CET.
 - Fit: conditional. A general-purpose language is not automatically eligible. A scoped QORVYNT deliverable could fit only if it makes a concrete contribution to trustworthy software supply chains, interoperability, reproducible builds, open standards or a safer open internet stack.
 - Next step: frame a small, testable deliverable and confirm with NLnet that it fits CodeSupply before preparing a full application.
 - Requirement: project outputs must be published under a recognised free/open-source licence.
+- AI policy caution: NLnet publishes specific restrictions on generative-AI use in applications. Read the current policy and write/review any application in compliance; do not submit AI-generated application text.
 
 ## Priority 3 — GitHub Secure Open Source Fund
 
