@@ -10,7 +10,7 @@ Crypto Daan is a voluntary community-support campaign for the QORVYNT open-techn
 - ETH — Ethereum mainnet
 - BNB — BNB Smart Chain
 - SOL — Solana
-- USDT — Ethereum (ERC-20), BNB Smart Chain (BEP-20), and Solana (SPL)
+- USDT — selectable networks remain disabled until correct network-specific receiving addresses are supplied
 
 Each asset/network has its own receiving-address setting. The campaign owner supplied these initial public addresses:
 
@@ -18,10 +18,10 @@ Each asset/network has its own receiving-address setting. The campaign owner sup
 - ETH (Ethereum): `0xFb28ed92F3fDA5F5394091D909B9423A20736aB5`
 - BNB (BNB Smart Chain): `0xFb28ed92F3fDA5F5394091D909B9423A20736aB5`
 - SOL: `DydeUcxGuhPcWryskJBw3KfNceeK7LkCNmYPhLgzpg5v`
-- USDT ERC-20: same EVM address above
-- USDT BEP-20: same EVM address above
+- USDT: no receiving address supplied yet; all USDT network options remain disabled.
+- An additional Phantom wallet address was supplied separately; its intended asset/token and network must be confirmed before configuration.
 
-These are owner-supplied, not independently ownership-verified. Test each network with a small transfer and inspect the transaction on the correct explorer before announcing that donations are live. Never paste one network's address into another network's setting unless the receiving wallet explicitly supports it.
+These are owner-supplied, not independently ownership-verified. The BNB address is the address explicitly supplied for BNB Smart Chain. The ETH address is only for Ethereum. No USDT address has been supplied, so USDT options stay disabled. The additional Phantom address is not assigned to any asset/network until its intended use is confirmed. Test each network with a small transfer and inspect the transaction on the correct explorer before announcing that donations are live.
 
 ## Configure receiving addresses before launch
 
