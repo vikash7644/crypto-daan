@@ -3,12 +3,12 @@
 import { useState } from "react";
 
 const assets = [
-  { id: "BTC", name: "Bitcoin", network: "Bitcoin network", address: process.env.NEXT_PUBLIC_BTC_ADDRESS || "", note: "Send BTC only. Do not send wrapped BTC or tokens." },
-  { id: "ETH", name: "Ethereum", network: "Ethereum mainnet", address: process.env.NEXT_PUBLIC_ETH_ADDRESS || "", note: "Send ETH on Ethereum mainnet only." },
-  { id: "BNB", name: "BNB", network: "BNB Smart Chain (BEP-20)", address: process.env.NEXT_PUBLIC_BNB_ADDRESS || "", note: "Send BNB on BNB Smart Chain only." },
-  { id: "SOL", name: "Solana", network: "Solana network", address: process.env.NEXT_PUBLIC_SOL_ADDRESS || "", note: "Send SOL on Solana network only." },
-  { id: "USDT-ERC20", name: "USDT", network: "Ethereum (ERC-20)", address: process.env.NEXT_PUBLIC_USDT_ERC20_ADDRESS || "", note: "USDT ERC-20 only. Ethereum gas fees apply." },
-  { id: "USDT-BEP20", name: "USDT", network: "BNB Smart Chain (BEP-20)", address: process.env.NEXT_PUBLIC_USDT_BEP20_ADDRESS || "", note: "USDT BEP-20 only. BNB gas fees apply." },
+  { id: "BTC", name: "Bitcoin", network: "Bitcoin network", address: process.env.NEXT_PUBLIC_BTC_ADDRESS || "bc1p8xm6dpk7lcuq3ahrdzzkfwdrt5f6xhkmezdup4trj280djht53mq5k3rkd", note: "Send BTC only. Do not send wrapped BTC or tokens." },
+  { id: "ETH", name: "Ethereum", network: "Ethereum mainnet", address: process.env.NEXT_PUBLIC_ETH_ADDRESS || "0xFb28ed92F3fDA5F5394091D909B9423A20736aB5", note: "Send ETH on Ethereum mainnet only." },
+  { id: "BNB", name: "BNB", network: "BNB Smart Chain (BEP-20)", address: process.env.NEXT_PUBLIC_BNB_ADDRESS || "0xFb28ed92F3fDA5F5394091D909B9423A20736aB5", note: "Send BNB on BNB Smart Chain only." },
+  { id: "SOL", name: "Solana", network: "Solana network", address: process.env.NEXT_PUBLIC_SOL_ADDRESS || "DydeUcxGuhPcWryskJBw3KfNceeK7LkCNmYPhLgzpg5v", note: "Send SOL on Solana network only." },
+  { id: "USDT-ERC20", name: "USDT", network: "Ethereum (ERC-20)", address: process.env.NEXT_PUBLIC_USDT_ERC20_ADDRESS || "0xFb28ed92F3fDA5F5394091D909B9423A20736aB5", note: "USDT ERC-20 only. Ethereum gas fees apply." },
+  { id: "USDT-BEP20", name: "USDT", network: "BNB Smart Chain (BEP-20)", address: process.env.NEXT_PUBLIC_USDT_BEP20_ADDRESS || "0xFb28ed92F3fDA5F5394091D909B9423A20736aB5", note: "USDT BEP-20 only. BNB gas fees apply." },
   { id: "USDT-SPL", name: "USDT", network: "Solana (SPL)", address: process.env.NEXT_PUBLIC_USDT_SOL_ADDRESS || "", note: "USDT SPL only. Solana network fees apply." },
 ];
 
@@ -77,7 +77,7 @@ export default function HomePage() {
             <optgroup label="USDT — select the exact network"><option value="USDT-ERC20">USDT · Ethereum (ERC-20)</option><option value="USDT-BEP20">USDT · BNB Smart Chain (BEP-20)</option><option value="USDT-SPL">USDT · Solana (SPL)</option></optgroup>
           </select>
           <div className="selected-asset"><div className="coin-symbol">{selected.id.startsWith("USDT") ? "₮" : selected.id === "BTC" ? "₿" : selected.id === "ETH" ? "Ξ" : selected.id === "BNB" ? "◆" : "◎"}</div><div><b>{selected.name}</b><small>{selected.network}</small></div><span className="network-pill">{selected.id}</span></div>
-          {!configured ? <div className="setup-alert"><b>{selected.name} address not configured</b><span>Donations for this option are disabled until the owner adds and verifies the correct receiving address. No payment should be sent to an unverified address.</span></div> : <div className="address-box"><span>Verified campaign receiving address</span><code>{selected.address}</code><button className="button button-primary copy-button" onClick={copyAddress} type="button">{copied ? "Copied ✓" : "Copy address"}</button></div>}
+          {!configured ? <div className="setup-alert"><b>{selected.name} address not configured</b><span>Donations for this option are disabled until the owner adds and verifies the correct receiving address. No payment should be sent to an unverified address.</span></div> : <div className="address-box"><span>Campaign receiving address — verify before sending</span><code>{selected.address}</code><button className="button button-primary copy-button" onClick={copyAddress} type="button">{copied ? "Copied ✓" : "Copy address"}</button></div>}
           <p className="network-warning">{selected.note}</p>
           <div className="status-message" role="status">{status || "After sending, keep your transaction ID for your records."}</div>
           <form className="reference-form" onSubmit={submitReference}>
