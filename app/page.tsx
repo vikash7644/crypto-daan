@@ -38,7 +38,7 @@ export default function HomePage() {
     <main className="site-shell">
       <nav className="topbar">
         <a className="brand" href="#"><span className="brand-mark">✳</span><span>CRYPTO <b>DAAN</b></span></a>
-        <div className="nav-links"><a href="#mission">Our mission</a><a href="#transparency">Transparency</a><a href="#contribute">Contribute</a></div>
+        <div className="nav-links"><a href="#mission">Our mission</a><a href="#faq">FAQ</a><a href="#transparency">Transparency</a><a href="#contribute">Contribute</a></div>
       </nav>
 
       <section className="hero">
