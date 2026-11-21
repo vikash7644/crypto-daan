@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 560" role="img" aria-labelledby="title desc">
+<title id="title">Crypto Daan mascot</title><desc id="desc">A friendly cartoon supporter holding a golden Bitcoin coin and giving a thumbs up.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#15134b"/><stop offset="1" stop-color="#07152e"/></linearGradient><linearGradient id="coin" x2="1" y2="1"><stop stop-color="#fff29a"/><stop offset=".5" stop-color="#ffbf24"/><stop offset="1" stop-color="#df7b00"/></linearGradient><linearGradient id="hood" x2="1" y2="1"><stop stop-color="#8b5cf6"/><stop offset="1" stop-color="#25115e"/></linearGradient></defs>
+<rect x="8" y="8" width="624" height="544" rx="42" fill="url(#bg)" stroke="#7c3aed" stroke-width="5"/>
+<circle cx="490" cy="110" r="68" fill="#123d88" opacity=".45"/><path d="M48 465 Q190 390 310 500" fill="none" stroke="#22d3ee" stroke-width="5" opacity=".6"/>
+<path d="M168 520 Q180 370 250 338 Q320 300 395 345 Q460 385 472 520Z" fill="url(#hood)" stroke="#a78bfa" stroke-width="7"/>
+<path d="M225 240 Q205 135 285 88 Q385 40 443 145 Q477 220 424 310 Q380 365 278 330 Q228 305 225 240Z" fill="#f4bd91" stroke="#6b341d" stroke-width="7"/>
+<path d="M219 215 Q188 110 278 65 Q390 15 459 130 Q420 96 382 105 Q330 125 286 108 Q275 165 219 215Z" fill="#1b1836" stroke="#08091c" stroke-width="9"/>
+<path d="M265 230 Q285 207 309 229" fill="none" stroke="#40231e" stroke-width="8" stroke-linecap="round"/><path d="M360 229 Q385 204 408 228" fill="none" stroke="#40231e" stroke-width="8" stroke-linecap="round"/>
+<ellipse cx="293" cy="250" rx="13" ry="18" fill="#1d223b"/><ellipse cx="387" cy="250" rx="13" ry="18" fill="#1d223b"/><circle cx="297" cy="244" r="5" fill="#fff"/><circle cx="391" cy="244" r="5" fill="#fff"/>
+<path d="M315 290 Q345 323 378 286" fill="none" stroke="#9c3435" stroke-width="9" stroke-linecap="round"/><path d="M325 300 Q346 315 366 299" fill="#fff" stroke="#fff" stroke-width="3"/>
+<path d="M260 355 Q322 405 400 352 L425 510 L235 510Z" fill="#17122f" stroke="#8b5cf6" stroke-width="7"/>
+<path d="M316 388 L348 420 L380 388" fill="none" stroke="#a78bfa" stroke-width="7"/><path d="M348 420 L348 465" stroke="#a78bfa" stroke-width="7"/>
+<path d="M190 180 Q122 115 85 147 Q58 170 89 205 L155 275 Q179 300 207 272" fill="#f4bd91" stroke="#6b341d" stroke-width="8"/>
+<circle cx="119" cy="176" r="75" fill="url(#coin)" stroke="#fff1a8" stroke-width="9"/><circle cx="119" cy="176" r="59" fill="none" stroke="#b66a00" stroke-width="5"/><text x="119" y="204" text-anchor="middle" font-size="82" font-weight="900" fill="#fff8d2">₿</text>
+<path d="M443 400 Q488 355 510 383 Q524 402 507 424 L481 451 Q468 464 452 448" fill="#f4bd91" stroke="#6b341d" stroke-width="8"/><path d="M492 397 Q496 350 520 347 Q538 348 535 371 L532 398 Q558 381 570 399 Q580 416 558 432 L521 459 Q495 469 478 447" fill="#f4bd91" stroke="#6b341d" stroke-width="8"/>
+<path d="M445 72 L460 35 L475 72 L515 78 L485 105 L492 144 L460 124 L427 144 L434 105 L405 78Z" fill="#facc15"/>
+<text x="320" y="500" text-anchor="middle" font-size="26" font-weight="800" fill="#e9d5ff">CRYPTO DAAN • BUILD TOGETHER</text>
+</svg>
