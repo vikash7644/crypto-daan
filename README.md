@@ -1,98 +1,66 @@
 # Crypto Daan
 
-A community campaign supporting open technology: QORVYNT Lang, QORVYNT Web4, and developer tools.
+**Campaign idea: One billion people. One dollar each. A future we build together.**
 
-**Want to support the work? Read [DONATE.md](./DONATE.md) for the campaign message, owner-supplied receiving addresses, network warnings, and transparency notes.**
+Crypto Daan is a voluntary community-support campaign for the QORVYNT open-technology vision: QORVYNT Lang, QORVYNT Web4 and developer tools. The $1 figure is an invitation/illustrative ambition, not a required amount, funds raised, forecast or guaranteed outcome. Contributions do not provide equity, ownership, tokens, rewards or financial return.
 
-The campaign is voluntary; contributions do not provide equity or financial returns. Wallet addresses are owner-supplied and must be checked carefully before sending.
+**Support the campaign:** see [DONATE.md](./DONATE.md) for the public contribution request, receiving addresses, network-specific warnings, and transparency information.
 
-## Features
-- Connect wallet with RainbowKit (MetaMask, WalletConnect, etc.)
-- Accept native ETH / polygon / other EVM-chain coin donations
-- Accept custom ERC-20 token donations
-- Donation wallet address display and copy action
-- Balance display for donation wallet
-- README with Vercel deployment steps
+## Supported payment choices in the UI
 
-## Quick start
+- BTC — Bitcoin network
+- ETH — Ethereum mainnet
+- BNB — BNB Smart Chain
+- SOL — Solana
+- USDT — selectable networks remain disabled until correct network-specific receiving addresses are supplied
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Create a `.env.local` file using `.env.example`:
-   ```bash
-   cp .env.example .env.local
-   ```
-3. Update the values if needed:
-   - `NEXT_PUBLIC_DONATION_ADDRESS` = your donation wallet address (default set to owner's address)
-   - `NEXT_PUBLIC_RPC_URL` = your chain RPC URL (e.g. Polygon, Ethereum)
-   - `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID` = your WalletConnect project ID (optional)
-4. Run locally:
-   ```bash
-   npm run dev
-   ```
-5. Open http://localhost:3000
+Each asset/network has its own receiving-address setting. The campaign owner supplied these initial public addresses:
 
-## Important notes
-- This website is intentionally simple and donor-friendly: no backend, no donation form submission database, no donor KYC.
-- Donors connect a wallet and send directly from it.
-- If you later convert crypto to fiat or use an exchange, KYC may be required by that platform.
-- For ERC-20 tokens, the donor wallet calls the token contract's `transfer()` function to your donation address.
+- BTC: `bc1p8xm6dpk7lcuq3ahrdzzkfwdrt5f6xhkmezdup4trj280djht53mq5k3rkd`
+- ETH (Ethereum): `0xFb28ed92F3fDA5F5394091D909B9423A20736aB5`
+- BNB (BNB Smart Chain): `0xFb28ed92F3fDA5F5394091D909B9423A20736aB5`
+- SOL: `DydeUcxGuhPcWryskJBw3KfNceeK7LkCNmYPhLgzpg5v`
+- USDT: no receiving address supplied yet; all USDT network options remain disabled.
+- Additional Phantom address: `CrvhxxxYenSVM1p7DBymnTqhAxc9oipRtGKyNNwih4EY` — displayed for transparency, but its asset/network designation is pending confirmation.
 
-## Privacy & Safety recommendations (read this)
+These are owner-supplied, not independently ownership-verified. The BNB address is the address explicitly supplied for BNB Smart Chain. The ETH address is only for Ethereum. No USDT address has been supplied, so USDT options stay disabled. The additional Phantom address is not assigned to any asset/network until its intended use is confirmed. The campaign owner has stated that all supplied wallet addresses are from Phantom. Test each network with a small transfer and inspect the transaction on the correct explorer before announcing that donations are live.
 
-This project aims to keep donor privacy high (no PII collected), while keeping your funds secure. Read these recommendations carefully and use them as a checklist before accepting public donations.
+## Pre-launch payment safety gate
 
-1. Use a separate donation wallet (recommended)
-   - Do NOT use your personal main wallet. Create a dedicated wallet specifically for donations.
-   - Better: use a multisig wallet (Gnosis Safe) so funds require multiple signatures to move. This reduces risk if one key is compromised.
-   - Quick Gnosis Safe guide: https://gnosis-safe.io/
+`NEXT_PUBLIC_DONATIONS_ENABLED` defaults to `false`. While false, the website displays the owner-supplied wallet addresses for review but disables the copy-to-send action and clearly tells visitors not to transfer funds. Keep it false until wallet control is verified, small test transfers are confirmed on each exact network, and qualified legal/tax/compliance review is complete. Only then may the campaign owner deliberately set it to `true` in the hosting environment and redeploy.
 
-2. Multisig flow (recommended)
-   - Create a Gnosis Safe on your chosen chain (Polygon recommended for lower gas).
-   - Use the Safe address as `NEXT_PUBLIC_DONATION_ADDRESS`.
-   - Keep signers' keys on hardware wallets and limit access.
+## Configure receiving addresses before launch
 
-3. Privacy considerations
-   - On-chain transactions are public: anyone can see which addresses donated and amounts. This is blockchain-native and cannot be hidden.
-   - This app stores no donor PII — it only displays the donation address and reads on-chain balances.
-   - If you need donor anonymity, communicate to donors how to use privacy-preserving techniques (e.g., use mixers at their own risk, or donate from fresh wallets).
+Set these environment variables in the hosting provider, using addresses controlled by the campaign owner and verified with test transfers:
 
-4. Adding tokens to donors' wallets
-   - The UI includes a "Detect token" action and an optional "Add token to MetaMask" helper.
-   - Donor wallets will always ask the donor to confirm transfers; the app cannot move funds without donor approval.
+- `NEXT_PUBLIC_BTC_ADDRESS`
+- `NEXT_PUBLIC_ETH_ADDRESS`
+- `NEXT_PUBLIC_BNB_ADDRESS`
+- `NEXT_PUBLIC_SOL_ADDRESS`
+- `NEXT_PUBLIC_USDT_ERC20_ADDRESS`
+- `NEXT_PUBLIC_USDT_BEP20_ADDRESS`
+- `NEXT_PUBLIC_USDT_SOL_ADDRESS` (not enabled)
 
-5. WalletConnect vs Injected wallets
-   - "Injected" wallets are browser extensions like MetaMask. These work on desktop and MetaMask mobile when using built-in browser.
-   - WalletConnect enables mobile wallets (Trust Wallet, Rainbow, MetaMask Mobile) to connect via QR/deep link.
-   - If you do not provide a WalletConnect Project ID, the app still supports injected wallets (MetaMask) but mobile QR connections won't work.
+After adding/changing variables, redeploy. Confirm the exact network and asset on a block explorer before publishing the campaign.
 
-6. Converting to fiat / exchanges
-   - If you convert donations to fiat using exchanges, those services will likely require KYC for the exchange account.
-   - Plan accounting and tax reporting accordingly.
+## Important implementation limitations
 
-## Vercel deployment
+- This version provides asset/network selection and copy-address instructions only.
+- It does not yet generate QR codes, monitor incoming transactions, calculate a live USD equivalent, or maintain a verified donor/raised-total counter.
+- Payment tracking, donor receipts, QR generation and on-chain payment verification are not active yet; the website does not collect transaction hashes or donor emails.
+- A transaction hash is not proof of successful receipt until independently checked on the correct chain.
+- Do not announce that donations are enabled until all addresses, network instructions, legal requirements and test transfers are verified.
 
-1. Push this repo to GitHub (already done).
-2. Open Vercel and import the repository.
-3. In project settings, set these environment variables:
-   - `NEXT_PUBLIC_DONATION_ADDRESS`
-   - `NEXT_PUBLIC_RPC_URL`
-   - `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID` (optional)
-   - `NEXT_PUBLIC_EXPLORER_URL`
-4. Deploy.
+## Development
 
-## Example env file
 ```bash
-NEXT_PUBLIC_DONATION_ADDRESS=0x1743FE06ad02B4422B9f214583A1C7e72aDE04b8
-NEXT_PUBLIC_RPC_URL=https://polygon-rpc.com
-NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=YOUR_PROJECT_ID
-NEXT_PUBLIC_EXPLORER_URL=https://polygonscan.com/address/
+npm install
+cp .env.example .env.local
+npm run dev
 ```
 
-## Notes for production
-- Use a secure custody wallet for funds.
-- Prefer multisig (Gnosis Safe) for donation wallets handling public funds.
-- Add on-chain monitoring and an off-chain receipts system if you need donor accounting.
-- Consider adding rate-limiters or captchas on any backend endpoints (if you add a backend later) to avoid spam.
+## Legal, tax and safety
+
+Crypto transfers are generally irreversible after confirmation. Donors must verify coin, network, receiving address, amount and network fee. Never ask donors for seed phrases or private keys. Do not describe contributions as tax-deductible unless that status has been independently established.
+
+A public crypto donation campaign may trigger fundraising, tax, foreign-contribution, consumer-protection or virtual-digital-asset rules depending on the campaign operator and donor locations. Obtain qualified jurisdiction-specific advice before accepting public contributions, especially cross-border contributions. This software is not legal, tax, investment or custody advice.
