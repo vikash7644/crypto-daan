@@ -6,6 +6,10 @@ We are building open technology for the next generation, including **QORVYNT Lan
 
 If you believe in open technology and want to help this work move forward, please consider making a voluntary crypto contribution. Every contribution is optional. The long-term ambition of one billion people contributing around one dollar each is a campaign vision—not money already raised, a forecast, or a promise.
 
+## Campaign status: pre-launch
+
+**Please do not send cryptocurrency yet.** The website is still in pre-launch review. Wallet addresses below are published for transparency, but contributions are not open until wallet control, network test transfers, and applicable legal/tax/compliance checks are complete and the campaign explicitly announces that payments are enabled.
+
 ## Receiving addresses
 
 Only send the exact asset on the exact network shown below. These public addresses were supplied by the campaign owner and have not been independently ownership-verified by GitHub.
@@ -21,7 +25,7 @@ Only send the exact asset on the exact network shown below. These public address
 
 `CrvhxxxYenSVM1p7DBymnTqhAxc9oipRtGKyNNwih4EY`
 
-This additional address was also supplied from the campaign owner's Phantom wallet. Its exact payment designation has not yet been confirmed, so **do not send funds to this address until the campaign publishes the matching asset and network**.
+This additional address was supplied from the campaign owner's Phantom wallet. Its exact payment designation has not yet been confirmed, so **do not send funds to this address until the campaign publishes the matching asset and network**.
 
 ### USDT
 
