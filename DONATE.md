@@ -27,9 +27,18 @@ The campaign owner confirms that all addresses listed here were supplied from th
 
 This additional address was supplied from the campaign owner's Phantom wallet. Its exact payment designation has not yet been confirmed, so **do not send funds to this address until the campaign publishes the matching asset and network**.
 
-### USDT
+### USDT network addresses supplied by the campaign owner
 
-USDT contributions are not enabled yet. Do not send USDT to the ETH, BNB, or SOL addresses above unless a separate instruction explicitly identifies the correct USDT token contract and network.
+The following additional receiving addresses were supplied by the campaign owner. The same EVM address is used on Arbitrum, Monad and Polygon; the network and exact token must still match. These addresses have not been independently ownership-verified, and contributions remain disabled.
+
+| Asset / token route | Network | Receiving address |
+|---|---|---|
+| USDT (Arbitrum route; may be represented as USDT0) | Arbitrum One | `0x3050cb3528Eb830abcb0d8f77bC7C35994452F05` |
+| USDT0 | Monad | `0x3050cb3528Eb830abcb0d8f77bC7C35994452F05` |
+| USDT (Polygon route) | Polygon | `0x3050cb3528Eb830abcb0d8f77bC7C35994452F05` |
+| USDT | Tron (TRC-20) | `TCSrfZzsVnpXCgcnLBEZKAsq52j4jZARNy` |
+
+**Important:** Do not send funds yet. On Arbitrum and Monad, verify whether the token in your wallet is the supported USDT0 route or another bridged token. On Polygon, verify the exact USDT contract. On Tron, use TRC-20 only. A matching-looking wallet address does not prove that a token or network is supported.
 
 ## Before contributing
 
