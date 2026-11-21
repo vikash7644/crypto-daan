@@ -113,3 +113,9 @@ button{cursor:pointer}
 .network-warning{font-size:10px;line-height:1.7;color:#e6c58b;margin:12px 0}
 .reference-form{border-top:1px solid var(--line);margin-top:18px;padding-top:5px}
 .reference-form small{display:block;color:#8493a2;font-size:9px;line-height:1.7;margin-top:12px}
+
+.pending-wallet{display:flex;flex-direction:column;gap:9px;margin-top:18px;padding:14px;border:1px dashed rgba(185,167,255,.35);border-radius:10px;background:rgba(185,167,255,.045)}
+.pending-wallet .eyebrow{color:var(--violet)}
+.pending-wallet code{font:10px 'DM Mono',monospace;color:#ddd5ff;overflow-wrap:anywhere;line-height:1.7}
+.pending-wallet small,.form-disclaimer{font-size:9px;line-height:1.75;color:#929eac}
+.form-disclaimer{margin:15px 0 0}
