@@ -8,7 +8,7 @@ Contributions are intended as voluntary project support. The long-term ambition 
 
 ## Campaign status: pre-launch
 
-<PRIVATE_PERSON> **Please do not send cryptocurrency yet.** The addresses below were supplied by the project owner and have passed basic format/checksum checks where applicable. This does **not** prove wallet ownership, signing control, token support, or successful test transfers. Contributions remain closed until the owner completes wallet-control checks, network-specific test transfers, and applicable legal/tax/compliance reviews, then explicitly announces that payments are enabled.
+**Please do not send cryptocurrency yet.** The addresses below were supplied by the project owner and have passed basic format/checksum checks where applicable. This does **not** prove wallet ownership, signing control, token support, or successful test transfers. Contributions remain closed until the owner completes wallet-control checks, network-specific test transfers, and applicable legal/tax/compliance reviews, then explicitly announces that payments are enabled.
 
 ## Receiving addresses supplied by the project owner
 
