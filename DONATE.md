@@ -1,16 +1,12 @@
 # Support Crypto Daan
 
-## One billion people. One dollar each. One big vision.
+## Community-powered support for QORVYNT
 
-We are building open technology for the next generation, including **QORVYNT Lang**, **QORVYNT Web4**, and developer tools.
+Crypto Daan is an individual-led community-support campaign for open technology, including QORVYNT Lang, its compiler, virtual machine, developer tools and public documentation.
 
-Contributions are intended as voluntary project support. The long-term ambition of one billion people contributing around one dollar each is a campaign vision—not money already raised, a forecast, or a promise.
+## Community contributions
 
-## Campaign status: pre-launch
-
-**Please do not send cryptocurrency yet.** The addresses below were supplied by the project owner and have passed basic format/checksum checks where applicable. This does **not** prove wallet ownership, signing control, token support, or successful test transfers. Contributions remain closed until the owner completes wallet-control checks, network-specific test transfers, and applicable legal/tax/compliance reviews, then explicitly announces that payments are enabled.
-
-## Receiving addresses supplied by the project owner
+The project owner has confirmed that the receiving addresses below were copied from their wallet receive screens. They have not been independently audited or proven through a signed message. Always verify the full address and network in your own wallet before sending.
 
 | Asset | Network | Receiving address |
 |---|---|---|
@@ -22,15 +18,15 @@ Contributions are intended as voluntary project support. The long-term ambition 
 | TRX | Tron mainnet | `TCSrfZzsVnpXCgcnLBEZKAsq52j4jZARNy` |
 | XLM | Stellar network | `GB3NAYUPZ4QKWTTK5FVVB5QBZE7LBFFFVSNXIVXGIYJQKRAZZNBNRPFW` |
 
-The same EVM address is used for Ethereum, Linea and BNB Smart Chain. These are different networks: **send only the native asset on the exact network selected**. An EVM address being identical across networks does not mean that assets or token contracts are interchangeable.
+The same EVM address is used for Ethereum, Linea and BNB Smart Chain. These are different networks: send only the native asset on the exact network selected.
 
-### Stablecoins are not enabled yet
+### Stablecoins are not offered
 
-USDT and USDC routes are intentionally omitted from the active address list. Before publishing a stablecoin route, the owner must confirm the exact token contract address, chain/network, and a successful small test transfer for that specific route. Do not infer a USDT destination from a native-coin address.
+USDT and USDC routes are intentionally not listed. Do not send stablecoins to these addresses based on assumptions about token compatibility.
 
 ## Check incoming payments without depositing funds
 
-You can inspect public on-chain activity for an address without funding the wallet or connecting a wallet. Open the matching explorer and paste the receiving address:
+You can inspect public on-chain activity without funding the wallet or connecting a wallet. Open the matching explorer and paste the receiving address:
 
 | Network | Public explorer |
 |---|---|
@@ -42,26 +38,26 @@ You can inspect public on-chain activity for an address without funding the wall
 | Tron | https://tronscan.org/ |
 | Stellar | https://stellar.expert/explorer/public/ |
 
-An explorer can show public transactions and balances, but it does not prove that the project owner controls the address. Allow for network confirmation/indexing delays. Do not pay anyone to "activate" an address or reveal a seed phrase/private key to check incoming funds.
+An explorer shows public transactions and balances; it does not prove who controls an address or automatically identify a payment as a campaign contribution. Allow for network confirmation and indexing delays.
 
-## Before contributing
+## Before sending
 
-- Contributions are currently closed. Wait for an explicit launch announcement.
-- Confirm the asset and network in your own wallet before signing.
-- For Ethereum, Linea and BNB Smart Chain, select the exact chain shown in the table.
-- For Stellar, check whether the sending service requires a memo; do not invent or reuse a memo.
-- Keep the transaction hash. A transaction is not acknowledged as received until independently checked on the relevant blockchain explorer.
-- Crypto transfers are generally irreversible. Send only an amount you can afford to lose.
+- Confirm the coin, network and complete receiving address.
+- For Ethereum, Linea and BNB Smart Chain, select the exact chain shown above.
+- For Stellar, check whether the sending service requires a memo; do not invent one.
+- Keep the transaction hash and independently check it on the relevant explorer.
+- Crypto transfers are generally irreversible. Send only an amount you can afford to contribute.
 - Never share a seed phrase, recovery phrase, private key, password or OTP.
+- Never pay anyone an "activation fee" to receive crypto.
 
 ## What contributions support
 
-Contributions are intended to support software development, testing, documentation, infrastructure, security reviews, and public releases for the open-technology projects described above. Progress and spending updates will be published as reliable records become available.
+Contributions are intended to support QORVYNT software engineering, compiler and VM development, testing, security reviews, infrastructure, documentation and public releases. Progress and spending updates will be published as reliable records become available.
 
-Contributions are voluntary and do not purchase equity, ownership, tokens, rewards, repayment, or financial returns. No tax deduction or charitable status is promised.
+Contributions are voluntary. They do not purchase equity, ownership, tokens, rewards, repayment or financial returns. No minimum contribution is required, and supporters do not need to join an organization, attend meetings or provide personal contact details to view the public addresses.
 
 ## Transparency and legal note
 
-This campaign is not represented as a registered charity or tax-exempt organization. Public and cross-border fundraising may be subject to legal, tax, foreign-contribution, and virtual-digital-asset requirements. The campaign must complete the applicable checks before broadly soliciting or accepting contributions. The tax treatment depends on the facts and applicable law; calling a payment a "gift" or "donation" does not automatically make it tax-free.
+This campaign is not represented as a registered charity or tax-exempt organization. No tax deduction is promised. The legal and tax treatment of receipts depends on the facts and applicable law, including rules that may apply to virtual digital assets and cross-border receipts. This page is informational and does not provide legal or tax advice.
 
-Thank you for supporting open technology and independent builders.
+Thank you for supporting independent open technology.
