@@ -2,61 +2,50 @@
 
 ## One billion people. One dollar each. One big vision.
 
-We are building open technology for the next generation, including **QORVYNT Lang**, **QORVYNT Web4**, and tools for developers.
+We are building open technology for the next generation, including **QORVYNT Lang**, **QORVYNT Web4**, and developer tools.
 
-If you believe in open technology and want to help this work move forward, please consider making a voluntary crypto contribution. Every contribution is optional. The long-term ambition of one billion people contributing around one dollar each is a campaign vision—not money already raised, a forecast, or a promise.
+Contributions are intended as voluntary project support. The long-term ambition of one billion people contributing around one dollar each is a campaign vision—not money already raised, a forecast, or a promise.
 
 ## Campaign status: pre-launch
 
-**Please do not send cryptocurrency yet.** The website is still in pre-launch review. Wallet addresses below are published for transparency, but contributions are not open until wallet control, network test transfers, and applicable legal/tax/compliance checks are complete and the campaign explicitly announces that payments are enabled.
+<PRIVATE_PERSON> **Please do not send cryptocurrency yet.** The addresses below were supplied by the project owner and have passed basic format/checksum checks where applicable. This does **not** prove wallet ownership, signing control, token support, or successful test transfers. Contributions remain closed until the owner completes wallet-control checks, network-specific test transfers, and applicable legal/tax/compliance reviews, then explicitly announces that payments are enabled.
 
-## Receiving addresses
-
-The campaign owner confirms that all addresses listed here were supplied from their Phantom wallet. These public addresses have not been independently ownership-verified by GitHub. Only send the exact asset on the exact network after the campaign formally opens.
+## Receiving addresses supplied by the project owner
 
 | Asset | Network | Receiving address |
 |---|---|---|
-| BTC | Bitcoin | `bc1p8xm6dpk7lcuq3ahrdzzkfwdrt5f6xhkmezdup4trj280djht53mq5k3rkd` |
-| ETH | Ethereum mainnet | `0xFb28ed92F3fDA5F5394091D909B9423A20736aB5` |
-| BNB | BNB Smart Chain (BEP-20) | `0xFb28ed92F3fDA5F5394091D909B9423A20736aB5` |
-| SOL | Solana | `DydeUcxGuhPcWryskJBw3KfNceeK7LkCNmYPhLgzpg5v` |
+| BTC | Bitcoin mainnet | `bc1qudgkwuqedlfsw3raacyfgxv5s0qt0jz3akkzz9` |
+| ETH | Ethereum mainnet | `0x3050cb3528Eb830abcb0d8f77bC7C35994452F05` |
+| ETH | Linea mainnet | `0x3050cb3528Eb830abcb0d8f77bC7C35994452F05` |
+| BNB | BNB Smart Chain (BEP-20) | `0x3050cb3528Eb830abcb0d8f77bC7C35994452F05` |
+| SOL | Solana mainnet | `J5z8XDkgGkDBjezuPvcPGYPuGiTJ9pUKXH5tBRLaxyAJ` |
+| TRX | Tron mainnet | `TCSrfZzsVnpXCgcnLBEZKAsq52j4jZARNy` |
+| XLM | Stellar network | `GB3NAYUPZ4QKWTTK5FVVB5QBZE7LBFFFVSNXIVXGIYJQKRAZZNBNRPFW` |
 
-### Additional Phantom wallet address
+The same EVM address is used for Ethereum, Linea and BNB Smart Chain. These are different networks: **send only the native asset on the exact network selected**. An EVM address being identical across networks does not mean that assets or token contracts are interchangeable.
 
-`CrvhxxxYenSVM1p7DBymnTqhAxc9oipRtGKyNNwih4EY`
+### Stablecoins are not enabled yet
 
-This additional address was supplied from the campaign owner's Phantom wallet. Its exact payment designation has not yet been confirmed, so **do not send funds to this address until the campaign publishes the matching asset and network**.
-
-### USDT network addresses supplied by the campaign owner
-
-The following additional receiving addresses were supplied by the campaign owner. The same EVM address is used on Arbitrum, Monad and Polygon; the network and exact token must still match. These addresses have not been independently ownership-verified, and contributions remain disabled.
-
-| Asset / token route | Network | Receiving address |
-|---|---|---|
-| USDT (Arbitrum route; may be represented as USDT0) | Arbitrum One | `0x3050cb3528Eb830abcb0d8f77bC7C35994452F05` |
-| USDT0 | Monad | `0x3050cb3528Eb830abcb0d8f77bC7C35994452F05` |
-| USDT (Polygon route) | Polygon | `0x3050cb3528Eb830abcb0d8f77bC7C35994452F05` |
-| USDT | Tron (TRC-20) | `TCSrfZzsVnpXCgcnLBEZKAsq52j4jZARNy` |
-
-**Important:** Do not send funds yet. On Arbitrum and Monad, verify whether the token in your wallet is the supported USDT0 route or another bridged token. On Polygon, verify the exact USDT contract. On Tron, use TRC-20 only. A matching-looking wallet address does not prove that a token or network is supported.
+USDT and USDC routes are intentionally omitted from the active address list. Before publishing a stablecoin route, the owner must confirm the exact token contract address, chain/network, and a successful small test transfer for that specific route. Do not infer a USDT destination from a native-coin address.
 
 ## Before contributing
 
-- Verify the address and network carefully in your own wallet before confirming.
-- For EVM transfers, confirm whether you are using Ethereum or BNB Smart Chain.
-- For Solana transfers, confirm the asset and token type; a SOL address should not automatically be treated as a confirmed USDT destination.
-- Send only an amount you can afford to lose. Crypto transfers are generally irreversible.
-- Never share your seed phrase, recovery phrase, private key, or wallet access with anyone.
-- Keep your transaction hash. A transaction is not acknowledged as received until independently checked on the relevant blockchain explorer.
+- Contributions are currently closed. Wait for an explicit launch announcement.
+- Confirm the asset and network in your own wallet before signing.
+- For Ethereum, Linea and BNB Smart Chain, select the exact chain shown in the table.
+- For Stellar, check whether the sending service requires a memo; do not invent or reuse a memo.
+- Keep the transaction hash. A transaction is not acknowledged as received until independently checked on the relevant blockchain explorer.
+- Crypto transfers are generally irreversible. Send only an amount you can afford to lose.
+- Never share a seed phrase, recovery phrase, private key, password or OTP.
 
 ## What contributions support
 
-Contributions are intended to support software development, testing, documentation, infrastructure, security reviews, and public releases for the open-technology projects described above. We will publish progress and spending updates as reliable records become available.
+Contributions are intended to support software development, testing, documentation, infrastructure, security reviews, and public releases for the open-technology projects described above. Progress and spending updates will be published as reliable records become available.
 
 Contributions are voluntary and do not purchase equity, ownership, tokens, rewards, repayment, or financial returns. No tax deduction or charitable status is promised.
 
 ## Transparency and legal note
 
-The campaign website and payment workflow are still being developed. Wallet addresses are owner-supplied and are not independently verified by this repository. Do not treat this page as proof of a registered charity or tax-exempt organization. Public and cross-border fundraising may be subject to legal, tax, foreign-contribution, and virtual-digital-asset requirements. The campaign must complete the applicable checks before broadly soliciting or accepting contributions.
+This campaign is not represented as a registered charity or tax-exempt organization. Public and cross-border fundraising may be subject to legal, tax, foreign-contribution, and virtual-digital-asset requirements. The campaign must complete the applicable checks before broadly soliciting or accepting contributions. The tax treatment depends on the facts and applicable law; calling a payment a "gift" or "donation" does not automatically make it tax-free.
 
 Thank you for supporting open technology and independent builders.
