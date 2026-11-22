@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Crypto Daan',
-  description: 'No-KYC direct crypto donation site',
+  description: 'Voluntary community support for open technology with public blockchain payment tracking links.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
