@@ -28,6 +28,22 @@ The same EVM address is used for Ethereum, Linea and BNB Smart Chain. These are 
 
 USDT and USDC routes are intentionally omitted from the active address list. Before publishing a stablecoin route, the owner must confirm the exact token contract address, chain/network, and a successful small test transfer for that specific route. Do not infer a USDT destination from a native-coin address.
 
+## Check incoming payments without depositing funds
+
+You can inspect public on-chain activity for an address without funding the wallet or connecting a wallet. Open the matching explorer and paste the receiving address:
+
+| Network | Public explorer |
+|---|---|
+| Bitcoin | https://mempool.space/ |
+| Ethereum | https://etherscan.io/ |
+| Linea | https://lineascan.build/ |
+| BNB Smart Chain | https://bscscan.com/ |
+| Solana | https://solscan.io/ |
+| Tron | https://tronscan.org/ |
+| Stellar | https://stellar.expert/explorer/public/ |
+
+An explorer can show public transactions and balances, but it does not prove that the project owner controls the address. Allow for network confirmation/indexing delays. Do not pay anyone to "activate" an address or reveal a seed phrase/private key to check incoming funds.
+
 ## Before contributing
 
 - Contributions are currently closed. Wait for an explicit launch announcement.
