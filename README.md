@@ -8,19 +8,11 @@ Crypto Daan is a voluntary community-support campaign concept for open technolog
 
 ## Current status: pre-launch
 
-**Do not send cryptocurrency. Contributions are not being accepted.** The website displays owner-supplied receiving addresses for transparency only. Wallet ownership, exact token contracts, network-specific test transfers and applicable legal/tax/compliance requirements have not all been independently verified or completed.
+**Do not send cryptocurrency. Contributions are not being accepted.** The project owner supplied updated receiving addresses for BTC, ETH, Linea ETH, BNB, SOL, TRX and XLM. Basic address-format checks do not prove ownership or signing control. Network-specific test transfers and applicable legal/tax/compliance reviews are still required.
 
-The payment selector on the static website lists these routes:
+Stablecoin routes (including USDT/USDC) are intentionally not enabled until each exact token contract and network is confirmed. The same EVM address is listed for Ethereum, Linea and BNB Smart Chain; send only the native asset on the exact network.
 
-- BTC — Bitcoin
-- ETH — Ethereum
-- BNB — BNB Smart Chain
-- SOL — Solana
-- USDT — Ethereum (ERC-20) and BNB Smart Chain (BEP-20)
-- USDT / USDT0 — Arbitrum One, Monad and Polygon
-- USDT — Tron (TRC-20)
-
-The addresses and network-specific warnings are documented in [DONATE.md](./DONATE.md). An address being displayed does not mean that the token contract or network has been verified. Do not transfer funds until the campaign completes its checks and explicitly announces that contributions are open.
+See [DONATE.md](./DONATE.md) for the owner-supplied addresses, network warnings and campaign status. Do not transfer funds until an explicit launch announcement.
 
 ## What the campaign intends to support
 
