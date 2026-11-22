@@ -14,6 +14,14 @@ export default function HomePage() {
           </div>
         </section>
       </div>
+      <section className="mx-auto mt-6 max-w-6xl px-4">
+        <div className="rounded-3xl border border-cyan-300/30 bg-gradient-to-r from-slate-900 via-indigo-950 to-violet-950 p-6 shadow-xl sm:p-8">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-300">Long-term funding ambition</p>
+          <h2 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-5xl">₹1 Lakh Crore</h2>
+          <p className="mt-2 text-xl font-semibold text-violet-200">₹1,00,00,00,00,000</p>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300">An ambitious long-term vision for building the wider QORVYNT technology ecosystem. This is not a verified estimate of current development costs or a claim about funds already raised. Any community support is voluntary.</p>
+        </div>
+      </section>
       <div className="mx-auto max-w-6xl px-4 py-10">
         <section className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div id="donate" className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-sm">
